@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" width="1600" height="600" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="fullBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+
+    <!-- Radar Sweep Gradient -->
+    <linearGradient id="fullSweepGrad" x1="280" y1="300" x2="480" y2="130" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#0284c7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Iris Gradient -->
+    <linearGradient id="fullIrisGrad" x1="220" y1="240" x2="340" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0f3b60"/>
+    </linearGradient>
+
+    <!-- Agro Leaf Gradient -->
+    <linearGradient id="fullLeafGrad" x1="420" y1="210" x2="470" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="32" flood-color="#0f3b60" flood-opacity="0.07"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#0f3b60" flood-opacity="0.04"/>
+    </filter>
+    <filter id="eyeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#0284c7" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <!-- Container Card Backdrop -->
+  <rect x="24" y="24" width="1552" height="552" rx="36" fill="url(#fullBgGrad)" stroke="#e2e8f0" stroke-width="2" filter="url(#cardShadow)"/>
+
+  <!-- ==================== LEFT: EMBLEM GRAPHIC ==================== -->
+  <g id="full-emblem" transform="translate(40, 0)">
+    <!-- Range Ring 1: Precision Dashed Perimeter -->
+    <circle cx="280" cy="300" r="210" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 10" fill="#ffffff" fill-opacity="0.7"/>
+
+    <!-- Range Ring 2: Satellite Orbit Ring -->
+    <circle cx="280" cy="300" r="162" stroke="#0284c7" stroke-width="2.5" stroke-opacity="0.4" fill="none"/>
+
+    <!-- Range Ring 3: Micro-climatic Target Ring -->
+    <circle cx="280" cy="300" r="108" stroke="#10b981" stroke-width="2.5" stroke-opacity="0.45" fill="#f0fdf4" fill-opacity="0.5"/>
+
+    <!-- Radar Sector Sweep Cone -->
+    <path d="M 280 300 L 462 195 A 210 210 0 0 0 280 90 Z" fill="url(#fullSweepGrad)"/>
+
+    <!-- Compass / Geodetic Crosshairs (N, S, W, E) -->
+    <line x1="280" y1="64" x2="280" y2="104" stroke="#0f3b60" stroke-width="5" stroke-linecap="round"/>
+    <line x1="280" y1="496" x2="280" y2="536" stroke="#0f3b60" stroke-width="5" stroke-linecap="round"/>
+    <line x1="44" y1="300" x2="84" y2="300" stroke="#0f3b60" stroke-width="5" stroke-linecap="round"/>
+    <line x1="476" y1="300" x2="516" y2="300" stroke="#0f3b60" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Cardinal Coordinates Dots -->
+    <circle cx="280" cy="138" r="3.5" fill="#64748b"/>
+    <circle cx="280" cy="462" r="3.5" fill="#64748b"/>
+    <circle cx="118" cy="300" r="3.5" fill="#64748b"/>
+    <circle cx="442" cy="300" r="3.5" fill="#64748b"/>
+
+    <!-- Agro Leaf Accent on Orbit -->
+    <path d="M 420 224 C 456 206 480 238 466 270 C 450 254 436 240 420 224 Z" fill="url(#fullLeafGrad)"/>
+
+    <!-- Eye Contour (வானவிழி - Eye of the Sky) -->
+    <g filter="url(#eyeGlow)">
+      <path d="M 148 300 C 196 220 364 220 412 300 C 364 380 196 380 148 300 Z" 
+            fill="#ffffff" stroke="#0f3b60" stroke-width="11" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Iris -->
+    <circle cx="280" cy="300" r="52" fill="url(#fullIrisGrad)"/>
+    <circle cx="280" cy="300" r="52" stroke="#0f3b60" stroke-width="3.5" fill="none"/>
+
+    <!-- Pupil Core & Moisture Droplet Aperture -->
+    <circle cx="280" cy="300" r="28" fill="#0284c7"/>
+    <circle cx="280" cy="300" r="15" fill="#0f3b60"/>
+
+    <!-- Specular Flare Reflection -->
+    <ellipse cx="293" cy="286" rx="9" ry="6.5" transform="rotate(-25 293 286)" fill="#ffffff"/>
+    <circle cx="270" cy="311" r="3.5" fill="#ffffff" fill-opacity="0.8"/>
+  </g>
+
+  <!-- ==================== RIGHT: TYPOGRAPHY & LOCKUP ==================== -->
+  <g id="full-typography" transform="translate(600, 0)">
+    
+    <!-- Top Row: English Brand Name + Tamil Script Mark -->
+    <g transform="translate(0, 195)">
+      <!-- Primary English Name -->
+      <text x="0" y="0" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-weight="800" font-size="94" fill="#0f3b60" letter-spacing="-2.5">VaanVizhi</text>
+      
+      <!-- Tamil Script Mark -->
+      <text x="500" y="-8" font-family="'Mukta Malar', 'Noto Sans Tamil', 'Inter', sans-serif" font-weight="700" font-size="64" fill="#0284c7" letter-spacing="-0.5">வானவிழி</text>
+    </g>
+
+    <!-- Subtitle / Platform Mission -->
+    <text x="4" y="270" font-family="'Inter', -apple-system, sans-serif" font-weight="600" font-size="30" fill="#334155" letter-spacing="-0.2">
+      Panchayat-Level Weather Intelligence &amp; Agro-Advisory Platform
+    </text>
+
+    <!-- Institutional / Descriptive Note -->
+    <text x="4" y="318" font-family="'Inter', -apple-system, sans-serif" font-weight="400" font-size="19" fill="#64748b" letter-spacing="0.1">
+      High-Resolution Micro-Scale Downscaling Engine for Precision Climate Resilience
+    </text>
+
+    <!-- Metadata Badges & Accreditation Tags -->
+    <g transform="translate(4, 370)">
+      <!-- Badge 1: SIH Problem Statement -->
+      <g>
+        <rect x="0" y="0" width="230" height="48" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="5" fill="#2563eb"/>
+        <text x="42" y="31" font-family="'Inter', -apple-system, monospace" font-weight="700" font-size="18" fill="#1d4ed8" letter-spacing="0.5">PS 26074 · SIH 2026</text>
+      </g>
+
+      <!-- Badge 2: Micro-Grid Resolution -->
+      <g transform="translate(250, 0)">
+        <rect x="0" y="0" width="220" height="48" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="5" fill="#16a34a"/>
+        <text x="42" y="31" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="18" fill="#15803d">1.0 km² Micro-Grid</text>
+      </g>
+
+      <!-- Badge 3: Decision Support System -->
+      <g transform="translate(490, 0)">
+        <rect x="0" y="0" width="210" height="48" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="5" fill="#475569"/>
+        <text x="42" y="31" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="18" fill="#334155">Decision Support</text>
+      </g>
+
+      <!-- Badge 4: TNAU / MoES / IMD Aligned -->
+      <g transform="translate(720, 0)">
+        <rect x="0" y="0" width="180" height="48" rx="10" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="5" fill="#9333ea"/>
+        <text x="42" y="31" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="18" fill="#7e22ce">IMD &amp; ERA5-Land</text>
+      </g>
+    </g>
+
+  </g>
+</svg>

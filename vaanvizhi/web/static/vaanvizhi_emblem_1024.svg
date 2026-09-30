@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" fill="none">
+  <defs>
+    <!-- Background subtle radial ambient -->
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0f9ff" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Radar Sweep Gradient -->
+    <linearGradient id="largeSweepGrad" x1="512" y1="512" x2="860" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#0284c7" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Pupil Core Gradient -->
+    <linearGradient id="irisGrad" x1="420" y1="420" x2="604" y2="604" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0f3b60"/>
+    </linearGradient>
+
+    <linearGradient id="dropletGrad" x1="490" y1="460" x2="550" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- Agro Leaf Gradient -->
+    <linearGradient id="leafGrad" x1="770" y1="360" x2="850" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Precision Drop Shadows -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#0f3b60" flood-opacity="0.08"/>
+    </filter>
+    <filter id="eyeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#0284c7" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Clean canvas backdrop -->
+  <rect width="1024" height="1024" fill="url(#bgGlow)"/>
+
+  <!-- Main Emblem Group Centered at (512, 512) -->
+  <g id="radar-emblem" filter="url(#softShadow)">
+
+    <!-- Ring 1: Outermost Range Ring (Dashed Precision Grid) -->
+    <circle cx="512" cy="512" r="390" stroke="#94a3b8" stroke-width="4.5" stroke-dasharray="14 14" fill="#ffffff" fill-opacity="0.7"/>
+
+    <!-- Ring 2: Secondary Satellite Orbit Ring -->
+    <circle cx="512" cy="512" r="300" stroke="#0284c7" stroke-width="4" stroke-opacity="0.45" fill="none"/>
+
+    <!-- Ring 3: Inner Micro-Climatic Core Range Ring -->
+    <circle cx="512" cy="512" r="200" stroke="#10b981" stroke-width="4" stroke-opacity="0.5" fill="#f0fdf4" fill-opacity="0.5"/>
+
+    <!-- Radar Sector Sweep Cone (Top-Right Quadrant 60deg arc) -->
+    <path d="M 512 512 L 850 316 A 390 390 0 0 0 512 122 Z" fill="url(#largeSweepGrad)"/>
+
+    <!-- Geodetic Axis Markers / Compass Crosshairs -->
+    <!-- North -->
+    <line x1="512" y1="80" x2="512" y2="150" stroke="#0f3b60" stroke-width="8" stroke-linecap="round"/>
+    <!-- South -->
+    <line x1="512" y1="874" x2="512" y2="944" stroke="#0f3b60" stroke-width="8" stroke-linecap="round"/>
+    <!-- West -->
+    <line x1="80" y1="512" x2="150" y2="512" stroke="#0f3b60" stroke-width="8" stroke-linecap="round"/>
+    <!-- East -->
+    <line x1="874" y1="512" x2="944" y2="512" stroke="#0f3b60" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Secondary Cardinal Ticks -->
+    <circle cx="512" cy="212" r="5" fill="#64748b"/>
+    <circle cx="512" cy="812" r="5" fill="#64748b"/>
+    <circle cx="212" cy="512" r="5" fill="#64748b"/>
+    <circle cx="812" cy="512" r="5" fill="#64748b"/>
+
+    <!-- Dynamic Agro Sprout / Leaf Accent on Satellite Orbit -->
+    <path d="M 770 370 C 835 340 880 395 855 455 C 825 425 800 400 770 370 Z" fill="url(#leafGrad)"/>
+
+    <!-- Eye Contour (வானவிழி - Eye of the Sky) -->
+    <g filter="url(#eyeShadow)">
+      <!-- Eye White Fill / Backdrop -->
+      <path d="M 270 512 C 355 370 669 370 754 512 C 669 654 355 654 270 512 Z" 
+            fill="#ffffff" stroke="#0f3b60" stroke-width="18" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Outer Iris Ring -->
+    <circle cx="512" cy="512" r="92" fill="url(#irisGrad)"/>
+    <circle cx="512" cy="512" r="92" stroke="#0f3b60" stroke-width="5" fill="none"/>
+
+    <!-- Inner Pupil & Moisture Droplet Aperture -->
+    <circle cx="512" cy="512" r="52" fill="#0284c7"/>
+    <circle cx="512" cy="512" r="28" fill="#0f3b60"/>
+
+    <!-- Specular Reflection / Moisture Light Flare -->
+    <ellipse cx="536" cy="484" rx="16" ry="12" transform="rotate(-25 536 484)" fill="#ffffff"/>
+    <circle cx="494" cy="532" r="6" fill="#ffffff" fill-opacity="0.8"/>
+  </g>
+</svg>

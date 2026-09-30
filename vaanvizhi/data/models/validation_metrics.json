@@ -1,0 +1,53 @@
+{
+  "tmax": {
+    "M0_RMSE": 0.46,
+    "M0_MAE": 0.366,
+    "M2_RMSE": 0.392,
+    "M2_MAE": 0.313,
+    "M3_RMSE": 0.389,
+    "M3_MAE": 0.31,
+    "p10_p90_coverage_pct": 80.02,
+    "target_coverage_pct": 80.0
+  },
+  "tmin": {
+    "M0_RMSE": 0.601,
+    "M0_MAE": 0.497,
+    "M2_RMSE": 0.566,
+    "M2_MAE": 0.468,
+    "M3_RMSE": 0.342,
+    "M3_MAE": 0.273,
+    "p10_p90_coverage_pct": 80.88,
+    "target_coverage_pct": 80.0
+  },
+  "rh": {
+    "M0_RMSE": 3.395,
+    "M3_RMSE": 2.977,
+    "M0_MAE": 2.708,
+    "M3_MAE": 2.375
+  },
+  "wind": {
+    "M0_RMSE": 3.765,
+    "M3_RMSE": 2.006
+  },
+  "rain": {
+    "brier_score": 0.1442,
+    "POD_hit_rate": 0.429,
+    "FAR_false_alarm": 0.397,
+    "CSI_critical_success_index": 0.335,
+    "evaluation_split": "2024-2025 Held-Out Test Set"
+  },
+  "spatial_validation": {
+    "lobo_per_block_rmse": {
+      "Andipatti": 0.4,
+      "Bodinayakanur": 0.39,
+      "Chinnamanur": 0.388,
+      "Cumbum": 0.362,
+      "K. Myladumparai": 0.406,
+      "Periyakulam": 0.389,
+      "Theni": 0.401,
+      "Uthamapalayam": 0.388
+    },
+    "lobo_headline_mean_rmse": 0.395,
+    "cumbum_note": "Cumbum (N=5) reported separately due to small sample size; excluded from LOBO headline mean."
+  }
+}

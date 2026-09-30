@@ -1,0 +1,131 @@
+block_name,gp_name,lat,lon,verified,source
+Andipatti,Ammachiapuram,10.08,77.66698,0,unverified_draft
+Andipatti,Anuppapatti,10.03586,77.66263,0,unverified_draft
+Andipatti,Bodithasanpatti,10.0243,77.63382,0,unverified_draft
+Andipatti,Ethakoil,9.95684,77.66621,0,unverified_draft
+Andipatti,Kadirnarasingapuram,9.90418,77.6709,0,unverified_draft
+Andipatti,Kanniservaipatty,10.0188,77.62438,0,unverified_draft
+Andipatti,Kothaluthu,10.00349,77.61844,0,unverified_draft
+Andipatti,Kothapatti,9.953,77.67843,0,unverified_draft
+Andipatti,Kovilpatti,10.00359,77.71426,0,unverified_draft
+Andipatti,Kunnur,10.022,77.641,1,Census 2011
+Andipatti,Marikkundu,10.08,77.66892,0,unverified_draft
+Andipatti,Mottanuthu,10.00862,77.70428,0,unverified_draft
+Andipatti,Okkaraipatti,9.91823,77.60443,0,unverified_draft
+Andipatti,Palacombai,9.98893,77.65867,0,unverified_draft
+Andipatti,Palayakottai,10.00251,77.65146,0,unverified_draft
+Andipatti,Pitchampatti,10.03135,77.64755,0,unverified_draft
+Andipatti,Rajakkalpatti,10.02375,77.65654,0,unverified_draft
+Andipatti,Rajadhani,9.983,77.671,1,Census 2011 / PWD
+Andipatti,Ramakrishnapuram,9.97263,77.61861,0,unverified_draft
+Andipatti,Rengasamudram,9.95255,77.66197,0,unverified_draft
+Andipatti,Shanmugasundarapuram,9.98975,77.71156,0,unverified_draft
+Andipatti,Sitharpatti,10.00572,77.71488,0,unverified_draft
+Andipatti,T.Subbulapuram,9.9503,77.65189,0,unverified_draft
+Andipatti,Thekkampatti,9.94385,77.64501,0,unverified_draft
+Andipatti,Theppampatti,10.04117,77.63952,0,unverified_draft
+Andipatti,Thimmarasanayakanur,9.99358,77.66774,0,unverified_draft
+Andipatti,Thirumalapuram,10.08,77.62364,0,unverified_draft
+Andipatti,G.Usilampatti,9.96101,77.63288,0,unverified_draft
+Andipatti,Pullimankombai,10.00162,77.62822,0,unverified_draft
+Andipatti,Rajagopalanpatti,10.02014,77.68087,0,unverified_draft
+Bodinayakanur,Ahamalai,9.97334,77.4202,0,unverified_draft
+Bodinayakanur,Ammapatti,9.96398,77.37637,0,unverified_draft
+Bodinayakanur,Annaikaraipatty,10.03237,77.42794,0,unverified_draft
+Bodinayakanur,Dombuchery,10.021,77.402,1,Census 2011 / SOI
+Bodinayakanur,Kamarajapuram,9.99806,77.36306,0,unverified_draft
+Bodinayakanur,Kodangipatty,10.04565,77.39123,0,unverified_draft
+Bodinayakanur,Kottakudi,10.0136,77.4229,0,unverified_draft
+Bodinayakanur,Koolayanur,9.96977,77.32904,0,unverified_draft
+Bodinayakanur,Maniyampatty,10.02342,77.32935,0,unverified_draft
+Bodinayakanur,Manjinayakanpatty,9.95277,77.40689,0,unverified_draft
+Bodinayakanur,Nagalapuram,10.05827,77.28006,0,unverified_draft
+Bodinayakanur,Rasingapuram,10.05967,77.39673,0,unverified_draft
+Bodinayakanur,Silamalai,9.9712,77.3458,1,Census 2011 / Survey of India
+Bodinayakanur,Sillamarathupatty,9.96789,77.40025,0,unverified_draft
+Bodinayakanur,Uppukottai,9.94896,77.33771,0,unverified_draft
+Chinnamanur,Alagapuri,9.83931,77.39957,0,unverified_draft
+Chinnamanur,Ayyampatti,9.85874,77.39164,0,unverified_draft
+Chinnamanur,Chinnaovalapuram,9.81507,77.43126,0,unverified_draft
+Chinnamanur,Erranampatty,9.86832,77.36885,0,unverified_draft
+Chinnamanur,Erasakkanayakanur,9.8251,77.42722,0,unverified_draft
+Chinnamanur,Kamtchipuram,9.86746,77.35785,0,unverified_draft
+Chinnamanur,Kanniservaipatty,9.83131,77.41585,0,unverified_draft
+Chinnamanur,Muthulapuram,9.79,77.35899,0,unverified_draft
+Chinnamanur,Pottipuram,9.87023,77.34831,0,unverified_draft
+Chinnamanur,Pulananthapuram,9.90124,77.35153,0,unverified_draft
+Chinnamanur,Pulikkuthi,9.79651,77.34511,0,unverified_draft
+Chinnamanur,Sankarapuram,9.84645,77.37267,0,unverified_draft
+Chinnamanur,Seepalakottai,9.818,77.38831,0,unverified_draft
+Chinnamanur,Veppampatty,9.81684,77.39261,0,unverified_draft
+K. Myladumparai,Athangaraipatty,9.8207,77.56115,0,unverified_draft
+K. Myladumparai,Ettaparajapuram,9.72557,77.58561,0,unverified_draft
+K. Myladumparai,Gandamanur,9.7939,77.58249,0,unverified_draft
+K. Myladumparai,Duraichamipuram,9.83866,77.52753,0,unverified_draft
+K. Myladumparai,Kumanatholu,9.82808,77.5131,0,unverified_draft
+K. Myladumparai,Manthisunai-Moolakadai,9.81728,77.47204,0,unverified_draft
+K. Myladumparai,Megamalai,9.7,77.4,1,SOI Toposheet / Forest Dept
+K. Myladumparai,Kadamalaikundu,9.82226,77.54617,0,unverified_draft
+K. Myladumparai,Myladumparai,9.69269,77.56003,0,unverified_draft
+K. Myladumparai,Murukodai,9.75571,77.63,0,unverified_draft
+K. Myladumparai,Nariyuthu,9.79586,77.63,0,unverified_draft
+K. Myladumparai,Muthalamparrai,9.8251,77.50616,0,unverified_draft
+K. Myladumparai,Ponnanpadugai,9.80181,77.55594,0,unverified_draft
+K. Myladumparai,Singarajapuram,9.83253,77.47476,0,unverified_draft
+K. Myladumparai,Thummakkundu,9.77115,77.51898,0,unverified_draft
+K. Myladumparai,Palothu,9.79803,77.55404,0,unverified_draft
+K. Myladumparai,Thangamalpuram,9.80303,77.57535,0,unverified_draft
+K. Myladumparai,Varusanadu,9.755,77.532,1,Census 2011
+Cumbum,Aangurpalayam,9.73065,77.3106,0,unverified_draft
+Cumbum,Karunakamuthanpatty,9.72542,77.28681,0,unverified_draft
+Cumbum,Kullappagoundanpatty,9.74359,77.29893,0,unverified_draft
+Cumbum,Narayanthevanpatty,9.71043,77.33963,0,unverified_draft
+Cumbum,Surulipatty,9.7035,77.3002,1,Census 2011 / SOI
+Periyakulam,A.Vadipatti,10.07614,77.49172,0,unverified_draft
+Periyakulam,Algarnaickanpatti,10.16035,77.56349,0,unverified_draft
+Periyakulam,Bomminaikanpatti,10.13074,77.52293,0,unverified_draft
+Periyakulam,D.Vadipatti,10.05907,77.53732,0,unverified_draft
+Periyakulam,Endapulli,10.11317,77.54543,0,unverified_draft
+Periyakulam,Erumalanaickanpatti,10.11875,77.58843,0,unverified_draft
+Periyakulam,G.Kallupatti,10.07109,77.48,0,unverified_draft
+Periyakulam,Gullapuram,10.0998,77.48669,0,unverified_draft
+Periyakulam,Jayamangalam,10.04,77.59829,0,unverified_draft
+Periyakulam,Keelavadagarai,10.12212,77.52306,0,unverified_draft
+Periyakulam,Lakshmipuram,10.09936,77.60602,0,unverified_draft
+Periyakulam,Melmangalam,10.0915,77.562,1,Census 2011
+Periyakulam,Muthalakampatti,10.1602,77.57642,0,unverified_draft
+Periyakulam,Sallipatti,10.12823,77.50779,0,unverified_draft
+Periyakulam,Sarathupatti,10.10998,77.5119,0,unverified_draft
+Periyakulam,Silvarpatty,10.18,77.50838,0,unverified_draft
+Periyakulam,Vadaputhupatti,10.06274,77.48785,0,unverified_draft
+Theni,Ambasamudram,10.03807,77.42997,0,unverified_draft
+Theni,Aranamaipudur,10.03131,77.48859,0,unverified_draft
+Theni,Dharmapuri,10.0028,77.54,0,unverified_draft
+Theni,Vengatachalapuram,9.99085,77.4949,0,unverified_draft
+Theni,Govindanagaram,9.96675,77.45605,0,unverified_draft
+Theni,Jangalpatty,10.03639,77.45684,0,unverified_draft
+Theni,Kattunaickanpatty,10.00879,77.50065,0,unverified_draft
+Theni,Koduvilarpatty,9.972,77.501,1,Census 2011
+Theni,Kottur,9.954,77.452,1,Census 2011
+Theni,Kuppinaickanpatty,10.01285,77.46754,0,unverified_draft
+Theni,Nagalapuram,10.01188,77.42,0,unverified_draft
+Theni,Pommalaikundu,10.00022,77.51188,0,unverified_draft
+Theni,Seelayampatty,10.07,77.50087,0,unverified_draft
+Theni,Srirengapuram,10.01538,77.48503,0,unverified_draft
+Theni,Thadicheri,9.98319,77.50887,0,unverified_draft
+Theni,Thappukundu,10.0416,77.46386,0,unverified_draft
+Theni,Upparpatty,9.95576,77.49306,0,unverified_draft
+Theni,Unjampatty,10.0541,77.46656,0,unverified_draft
+Uthamapalayam,Annaimalayanpatty,9.82432,77.34031,0,unverified_draft
+Uthamapalayam,Gokilapuram,9.832,77.331,1,Census 2011
+Uthamapalayam,Lakshminayakanpatty,9.84961,77.34285,0,unverified_draft
+Uthamapalayam,Nagayagoundanpatty,9.78251,77.35117,0,unverified_draft
+Uthamapalayam,Pallavarayanpatti,9.80455,77.33073,0,unverified_draft
+Uthamapalayam,Ramasamynayakanpatty,9.84612,77.28402,0,unverified_draft
+Uthamapalayam,Royappanpatty,9.84523,77.30309,0,unverified_draft
+Uthamapalayam,T.Meenatchipuram,9.79469,77.36023,0,unverified_draft
+Uthamapalayam,T.Renganathapuram,9.85706,77.30949,0,unverified_draft
+Uthamapalayam,T.Sindalaichery,9.77896,77.29188,0,unverified_draft
+Uthamapalayam,Thamminayakanpatty,9.78508,77.37007,0,unverified_draft
+Uthamapalayam,U.Ammapatty,9.82149,77.30515,0,unverified_draft
+Uthamapalayam,Melasindalaicery,9.81038,77.29662,0,unverified_draft

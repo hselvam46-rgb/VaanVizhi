@@ -1,0 +1,23 @@
+- id: cotton_sowing_dry_spell
+  crop: cotton
+  stages: [seedling]
+  when:
+    all:
+      - {var: prob_rain, op: "<=", value: 0.10}
+      - {var: tmax, op: ">=", value: 36.0}
+  severity: amber
+  advice_en: "Prolonged dry spell during sowing window. Defer sowing dryland cotton until receipt of soaking monsoon showers."
+  advice_ta: "மழை இல்லாத வறண்ட சூழல் நிலவுகிறது. பருவமழை பெய்யும் வரை மானாவாரி பருத்தி விதைப்பை ஒத்திவைக்கவும்."
+  source: "TNAU Directorate of Extension Education: Cotton Contingency Plan for Rainfed Tracts"
+
+- id: cotton_bollworm_humidity
+  crop: cotton
+  stages: [squaring_flowering, boll_development]
+  when:
+    all:
+      - {var: rh, op: ">=", value: 75.0}
+      - {var: tmax, op: "<=", value: 33.0}
+  severity: amber
+  advice_en: "High humidity during square formation encourages bollworm incidence. Install pheromone traps at 5 per acre."
+  advice_ta: "காற்றில் அதிக ஈரப்பதம் உள்ளதால் காய் புழுக்கள் தாக்க வாய்ப்பு. ஏக்கருக்கு 5 இனக்கவர்ச்சி பொறிகள் வைக்கவும்."
+  source: "ICAR-Central Institute for Cotton Research (CICR) Integrated Pest Management"

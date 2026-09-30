@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_dashboard" name="shell-type"/>
+  <title>VaanVizhi (வானவிழி) - Panchayat-Level Weather Intelligence &amp; Agro-Advisory Platform</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <!-- Material Symbols Outlined & Lucide -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Leaflet GIS Mapping -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed-dim": "#93ccff",
+            "surface-bright": "#faf8ff",
+            "surface-container-high": "#e2e7ff",
+            "on-background": "#131b2e",
+            "error": "#ba1a1a",
+            "inverse-surface": "#283044",
+            "secondary-container": "#82f5c1",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#cce5ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#002114",
+            "tertiary": "#00263d",
+            "background": "#faf8ff",
+            "inverse-primary": "#a5caf6",
+            "primary-container": "#0f3b60",
+            "surface-container-highest": "#dae2fd",
+            "primary-fixed-dim": "#a5caf6",
+            "on-primary-fixed": "#001d35",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#003c5e",
+            "on-tertiary-container": "#49a9ef",
+            "on-primary": "#ffffff",
+            "primary-fixed": "#d1e4ff",
+            "secondary-fixed": "#85f8c4",
+            "on-error": "#ffffff",
+            "inverse-on-surface": "#eef0ff",
+            "surface-container": "#eaedff",
+            "secondary-fixed-dim": "#68dba9",
+            "on-tertiary-fixed": "#001d31",
+            "on-secondary-container": "#00714e",
+            "outline-variant": "#c2c7cf",
+            "error-container": "#ffdad6",
+            "on-surface": "#131b2e",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#42474e",
+            "surface": "#faf8ff",
+            "surface-variant": "#dae2fd",
+            "surface-dim": "#d2d9f4",
+            "on-secondary-fixed-variant": "#005137",
+            "surface-tint": "#3c6188",
+            "surface-container-low": "#f2f3ff",
+            "primary": "#002542",
+            "secondary": "#006c4a",
+            "on-primary-fixed-variant": "#21496f",
+            "on-tertiary-fixed-variant": "#004b73",
+            "on-primary-container": "#81a6d0",
+            "outline": "#73777f"
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            mono: ["JetBrains Mono", "Roboto Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="/static/style.css?v=6"/>
+</head>
+
+<body class="bg-surface font-sans text-on-surface antialiased text-[13px] leading-normal select-none min-h-screen flex">
+
+  <!-- ========================================================================= -->
+  <!-- 1. FIXED LEFT VERTICAL SIDEBAR (w-64) -->
+  <!-- ========================================================================= -->
+  <aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto border-r border-surface-container-high/60">
+    
+    <!-- Top Group: Logo, Sync Status, Micro Geo Target, Nav Links -->
+    <div class="p-4 flex flex-col gap-3">
+      
+      <!-- Brand Logo & Header -->
+      <div class="flex items-center gap-2.5 pb-1">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white shadow-md shadow-primary/20">
+          <span class="material-symbols-outlined text-[20px]">radar</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-[15px] text-primary tracking-tight">VaanVizhi</span>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-primary-container text-white font-bold">PS 26074</span>
+          </div>
+          <span class="text-[10px] text-on-surface-variant leading-none">வானவிழி · Panchayat Meteo</span>
+        </div>
+      </div>
+
+      <!-- Operational Sync Pill Box -->
+      <div class="bg-surface-container-low rounded-lg p-2.5 shadow-sm border border-outline-variant/20">
+        <div class="flex items-center justify-between mb-1">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            <span class="text-[10px] uppercase font-bold text-secondary tracking-wider">Operational Sync</span>
+          </div>
+          <span class="font-mono text-[11px] text-on-surface-variant font-semibold">06:00 IST</span>
+        </div>
+        <div class="flex items-center justify-between text-on-surface-variant font-mono text-[10px]">
+          <span>IMD &amp; ERA5-Land</span>
+          <span class="text-secondary font-bold">Active</span>
+        </div>
+      </div>
+
+      <!-- Micro Geo Target Box (Clean Vertical Card Stacks) -->
+      <div class="bg-surface-container rounded-lg p-2.5 flex flex-col gap-1.5 border border-outline-variant/20">
+        <div class="flex items-center justify-between pb-0.5">
+          <span class="text-[10px] uppercase text-on-surface-variant font-bold tracking-wider">Micro Geo Target</span>
+          <span class="font-mono text-[10px] text-primary font-bold">1.0 km² Mesh</span>
+        </div>
+        
+        <div class="flex flex-col gap-1.5">
+          <!-- District Field -->
+          <div class="flex flex-col gap-0.5 bg-surface-container-lowest px-2.5 py-1.5 rounded-md shadow-xs border border-outline-variant/20">
+            <span class="text-on-surface-variant text-[9px] uppercase font-bold tracking-wider">District</span>
+            <select id="sidebarDistrictSelect" class="w-full bg-transparent text-[11px] font-bold text-primary focus:outline-none cursor-pointer">
+              <option value="Dindigul" selected>Dindigul (திண்டுக்கல்)</option>
+              <option value="Theni">Theni (தேனி மாவட்டம்)</option>
+            </select>
+          </div>
+
+          <!-- Block Field -->
+          <div class="flex flex-col gap-0.5 bg-surface-container-lowest px-2.5 py-1.5 rounded-md shadow-xs border border-outline-variant/20">
+            <span class="text-on-surface-variant text-[9px] uppercase font-bold tracking-wider">Block</span>
+            <select id="sidebarBlockSelect" class="w-full bg-transparent text-[11px] font-bold text-primary focus:outline-none cursor-pointer">
+              <option value="VEDA" selected>Vedasandur (வேடசந்தூர்)</option>
+              <option value="BODI">Bodinayakanur (போடி)</option>
+              <option value="CUMB">Cumbum (கம்பம்)</option>
+              <option value="THENI">Theni (தேனி)</option>
+              <option value="PERI">Periyakulam (பெரியகுளம்)</option>
+              <option value="CHIN">Chinnamanur (சின்னமனூர்)</option>
+              <option value="ANDI">Andipatti (ஆண்டிபட்டி)</option>
+              <option value="UTHA">Uthamapalayam (உத்தமபாளையம்)</option>
+              <option value="KMYL">K. Myladumparai (மயிலை)</option>
+            </select>
+          </div>
+
+          <!-- Panchayat Field -->
+          <div class="flex items-center justify-between bg-surface-container-lowest px-2.5 py-1.5 rounded-md shadow-xs border border-outline-variant/20">
+            <span class="text-on-surface-variant text-[9px] uppercase font-bold tracking-wider">Panchayat</span>
+            <span class="text-secondary font-bold text-[11px] truncate max-w-[130px]" id="sidebarPanchayatName">Kovilur</span>
+          </div>
+
+          <!-- Real-Time GPS Quick Detect -->
+          <div class="flex items-center justify-between px-1 pt-0.5">
+            <button id="sidebarGpsBtn" class="flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 font-bold cursor-pointer transition-colors" title="Detect your real-time location via GPS">
+              <span class="material-symbols-outlined text-[14px]">my_location</span>
+              <span>Find My Location</span>
+            </button>
+            <span id="sidebarGpsDist" class="text-[10px] font-mono text-on-surface-variant font-medium"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left Sidebar Navigation Menu -->
+      <nav class="flex flex-col gap-1 pt-1" id="sidebarNav">
+        <a href="#" class="sidebar-nav-item active flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all bg-primary-container text-white font-bold shadow-xs text-[13px]" data-tab="tabOverview">
+          <span class="material-symbols-outlined text-[19px]">grid_view</span>
+          <span>Overview</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" data-tab="tabPanchayatMap">
+          <span class="material-symbols-outlined text-[19px]">map</span>
+          <span>Panchayat Map (GIS)</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" data-tab="tabForecast">
+          <span class="material-symbols-outlined text-[19px]">air</span>
+          <span>Forecast Analysis</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" data-tab="tabAdvisory">
+          <span class="material-symbols-outlined text-[19px]">agriculture</span>
+          <span>Agro Advisory</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" data-tab="tabSpatialDisaggregation">
+          <span class="material-symbols-outlined text-[19px]">layers</span>
+          <span>Spatial Disaggregation</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" data-tab="tabModelInsights">
+          <span class="material-symbols-outlined text-[19px]">psychology</span>
+          <span>Model Insights (ML)</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" data-tab="tabValidation">
+          <span class="material-symbols-outlined text-[19px]">verified</span>
+          <span>Data &amp; Validation</span>
+        </a>
+        <a href="#" class="sidebar-nav-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all text-[13px]" id="sidebarOpenImdBtn">
+          <span class="material-symbols-outlined text-[19px]">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+    </div>
+
+    <!-- Bottom Group: Ping, Language Toggle, Officer Profile -->
+    <div class="p-3 bg-surface-container-low/60 flex flex-col gap-2 border-t border-outline-variant/15">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          <span class="font-mono text-[10px] text-on-surface-variant">Mesh Ping: 24ms</span>
+        </div>
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-1 bg-surface-container-highest px-1.5 py-0.5 rounded text-[11px]">
+          <button id="sidebarLangEn" class="text-primary font-bold">EN</button>
+          <span class="text-on-surface-variant">/</span>
+          <button id="sidebarLangTa" class="text-on-surface-variant hover:text-primary">தமிழ்</button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 pt-1 border-t border-outline-variant/10">
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white shrink-0">
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <span class="font-bold text-[12px] text-on-surface truncate">Dr. K. Ramanathan</span>
+          <span class="font-mono text-[10px] text-on-surface-variant truncate" id="sidebarOfficerBadge">Agro-Met Officer, DGL</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- 2. MAIN LAYOUT WRAPPER (pl-64) -->
+  <!-- ========================================================================= -->
+  <div class="pl-64 flex flex-col min-h-screen w-full">
+
+    <!-- Fixed Top Header -->
+    <header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-6 border-b border-surface-container-high/60">
+      
+      <!-- Left: Breadcrumb Trail -->
+      <div class="flex items-center gap-2 text-[13px] text-on-surface-variant">
+        <span class="font-medium text-on-surface" id="crumbDistrict">Dindigul</span>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <span id="crumbBlock">Vedasandur Block</span>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <span class="text-primary font-bold" id="crumbPanchayat">Kovilur Panchayat</span>
+        <span class="ml-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-secondary-container text-on-secondary-container font-bold">1.0 km² Mesh</span>
+      </div>
+
+      <!-- Right: Search, Active Flags, Action Buttons, Avatar -->
+      <div class="flex items-center gap-3">
+        <!-- Live Search -->
+        <div class="relative flex items-center">
+          <span class="material-symbols-outlined absolute left-2.5 text-[18px] text-outline">search</span>
+          <input id="globalPanchayatSearch" class="h-9 pl-8 pr-3 w-56 rounded-lg bg-surface-container text-on-surface text-[12px] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search Panchayat or PIN..." type="text"/>
+        </div>
+
+        <!-- 4 Active Flags Badge -->
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-mono text-[11px] font-bold cursor-pointer hover:opacity-90" id="flagsPillBtn" title="View Active Flags">
+          <span class="material-symbols-outlined text-[15px]">warning</span>
+          <span>4 Active Flags</span>
+        </div>
+
+        <!-- Real-Time Location Button -->
+        <button id="topLiveLocationBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-all text-[12px] font-bold shadow-xs cursor-pointer" title="Auto-detect real-time GPS location and live weather">
+          <span class="material-symbols-outlined text-[16px]">my_location</span>
+          <span id="topLiveLocationBtnLabel">Live Location</span>
+        </button>
+
+        <!-- Sync Run Button -->
+        <button id="syncRunTopBtn" class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors text-[12px] font-semibold border border-outline-variant/20">
+          <span class="material-symbols-outlined text-[16px]">sync</span>
+          <span>Sync Run</span>
+        </button>
+
+        <!-- Export Button -->
+        <button id="exportTopBtn" class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-primary-container transition-colors text-[12px] font-bold shadow-xs">
+          <span class="material-symbols-outlined text-[16px]">download</span>
+          <span>Export</span>
+        </button>
+
+        <!-- User Profile Avatar -->
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Main Content Area with ample breathing room (pt-20 = 80px) -->
+    <main class="relative pt-20 bg-surface w-full px-6 py-5 flex-1">
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 1: OVERVIEW TAB (FLAGSHIP COMMAND CENTER WITH VERTICAL SIDEBAR) -->
+      <!-- ===================================================================== -->
+      <div id="tabOverview" class="tab-panel active flex flex-col w-full gap-5 pb-12">
+        
+        <!-- TOP COMMAND & DISAGGREGATION HERO -->
+        <section class="flex flex-col gap-4">
+          
+          <!-- Breadcrumb & Control Bar (Clean Vertical Separation) -->
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] uppercase text-secondary font-bold tracking-wider leading-none">Meteorological Downscaling Engine</span>
+                <span class="text-on-surface-variant font-mono text-[11px] leading-none">•</span>
+                <span class="font-mono text-[11px] text-on-surface-variant leading-none">Version 2.4-TNAU-Ensemble</span>
+              </div>
+              
+              <!-- Clean Title with explicit height and line-height -->
+              <h1 class="text-[28px] md:text-[32px] font-bold text-primary tracking-tight leading-[38px] my-1" id="deckMainTitle">
+                Weather Intelligence for Agriculture
+              </h1>
+              
+              <p class="text-[13px] text-on-surface-variant leading-normal" id="deckLocationSub">
+                Dindigul District (<span class="font-semibold text-on-surface">திண்டுக்கல்</span>) · Vedasandur Block (<span class="font-semibold text-on-surface">வேடசந்தூர்</span>) — 1.0 km² Gridded Mesh Real-Time Simulation
+              </p>
+            </div>
+
+            <!-- Operational Telemetry Action Buttons -->
+            <div class="flex flex-wrap items-center gap-2 shrink-0">
+              <!-- Button 1: Model Refresh -->
+              <button type="button" id="btnTelemetryModelRefresh" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-container-highest shadow-xs border border-outline-variant/25 cursor-pointer active:scale-95 transition-all text-left" title="Click to refresh meteorological inference model & re-sync telemetry">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-ping" id="telemetryPingDot"></span>
+                <span class="material-symbols-outlined text-[15px] text-secondary hidden animate-spin" id="telemetrySpinIcon">sync</span>
+                <span class="font-mono text-[11px] text-on-surface font-semibold" id="telemetryRefreshText">Model Refresh: Today 06:00 IST</span>
+              </button>
+
+              <!-- Button 2: Horizon 1-5 Days -->
+              <button type="button" id="btnTelemetryHorizon" class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container-high shadow-xs text-on-surface-variant hover:text-on-surface border border-outline-variant/30 cursor-pointer active:scale-95 transition-all" title="Click to view 5-Day Multi-Quantile Forecast Analysis & lead day projections">
+                <span class="material-symbols-outlined text-[15px] text-primary">calendar_month</span>
+                <span class="font-mono text-[11px] font-semibold" id="telemetryHorizonText">Horizon: 1–5 Days</span>
+              </button>
+
+              <!-- Button 3: 1.0 km² Micro-Grid -->
+              <button type="button" id="btnTelemetryMicroGrid" class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary-container hover:bg-primary text-white shadow-xs cursor-pointer active:scale-95 transition-all" title="Click to inspect 1.0 km² Gridded Mesh on GIS Panchayat Map">
+                <span class="material-symbols-outlined text-[15px]">grid_4x4</span>
+                <span class="font-mono text-[11px] font-semibold">1.0 km² Micro-Grid</span>
+              </button>
+
+              <!-- Button 4: Run #4 LightGBM -->
+              <button type="button" id="btnTelemetryModelRun" class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-highest hover:bg-secondary-container text-on-surface shadow-xs border border-outline-variant/30 cursor-pointer active:scale-95 transition-all" title="Click to view Model Run #4 architecture, loss metrics & SHAP attribution">
+                <span class="material-symbols-outlined text-[15px] text-secondary">memory</span>
+                <span class="font-mono text-[11px] font-bold">Run #4: LightGBM + Topo Residuals</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Primary Disaggregation Banner Card -->
+          <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-5 shadow-sm border border-outline-variant/30 flex flex-col lg:flex-row items-stretch justify-between gap-5">
+            <div class="flex-1 flex flex-col justify-between gap-2.5 z-10">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold bg-primary text-white">Disaggregation Delta</span>
+                <span class="text-[10px] text-on-surface-variant uppercase font-semibold tracking-wider">Orographic Amplification Tag</span>
+              </div>
+              <div>
+                <h2 class="text-[20px] font-bold text-primary leading-tight" id="bannerH2">
+                  IMD Baseline: <span class="text-on-surface-variant line-through font-normal" id="bannerImdBase">28.0 mm</span> → VaanVizhi Micro-Scale: <span class="text-secondary font-bold" id="bannerDownscaleRange">12.0 mm to 41.0 mm</span>
+                </h2>
+                <p class="text-[13px] text-on-surface-variant mt-1.5 max-w-3xl leading-relaxed" id="bannerExplanationText">
+                  Palani foothill topographic windward funneling delivers <span class="font-bold text-error">+46.4% localized convective enhancement</span> across Kovilur panchayat while eastern plains (Kalvarpatti) remain in rain-shadow subsidence.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 pt-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-3 h-3 rounded-sm bg-surface-container-high border border-outline-variant/40"></span>
+                  <span class="text-[12px] text-on-surface-variant">Coarse IMD GFS Mesh (12 km²)</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-3 h-3 rounded-sm bg-primary-container"></span>
+                  <span class="text-[12px] text-on-surface font-semibold">VaanVizhi ML Downscaled (1.0 km²)</span>
+                </div>
+                <div class="flex items-center gap-1 px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-mono text-[11px] font-bold">
+                  <span id="bannerGradientTag">Spatial Gradient: Δ29 mm / 14 km</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Comparative Disaggregation Meter Gauge -->
+            <div class="lg:w-80 flex flex-col justify-center gap-2 bg-surface-container-low p-4 rounded-xl z-10 border border-outline-variant/20 shrink-0">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Micro-Relief Multiplier</span>
+                <span class="font-mono text-[12px] text-secondary font-bold" id="bannerReliefMultiplier">+46.4% Peak</span>
+              </div>
+              <div class="relative w-full h-3 rounded-full bg-surface-container-high overflow-hidden">
+                <div class="absolute left-0 top-0 h-full bg-outline-variant w-[45%]" title="Baseline"></div>
+                <div class="absolute left-[45%] top-0 h-full bg-secondary w-[42%]" title="Micro-Climatic Gain"></div>
+              </div>
+              <div class="flex items-center justify-between font-mono text-[11px] text-on-surface-variant">
+                <span id="bannerMinGauge">Min: 12mm (Kalvarpatti)</span>
+                <span class="font-bold text-primary" id="bannerMaxGauge">Kovilur: 41mm</span>
+              </div>
+            </div>
+
+            <!-- Ambient Decorative Contour Lines -->
+            <div class="absolute -right-16 -top-12 opacity-10 pointer-events-none">
+              <svg class="text-primary" fill="none" height="220" viewBox="0 0 340 220" width="340">
+                <path d="M10 200C60 170 120 180 180 130C240 80 290 90 330 30" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path>
+                <path d="M20 215C70 185 130 195 190 145C250 95 300 105 340 45" stroke="currentColor" stroke-width="2"></path>
+                <path d="M0 180C50 150 110 160 170 110C230 60 280 70 320 10" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6 COMPACT KPI TELEMETRY CARDS -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
+          
+          <!-- Card 1: Rainfall -->
+          <div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Rainfall (48h)</span>
+              <span class="material-symbols-outlined text-[18px] text-primary">rainy</span>
+            </div>
+            <div class="my-1.5">
+              <div class="flex items-baseline gap-1">
+                <span class="text-[28px] leading-none font-bold text-primary font-mono tracking-tight" id="kpiRainVal">42</span>
+                <span class="text-[12px] font-sans font-medium text-on-surface-variant">mm</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-secondary font-medium font-mono mt-1" id="kpiRainDiffTag">
+                <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                <span>+14mm vs block avg</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 font-mono text-[11px] text-on-surface-variant">
+              <span>PoP: <strong class="text-on-surface" id="kpiRainProb">78%</strong></span>
+              <span class="px-1.5 py-0.5 rounded bg-surface-container-high text-primary font-bold">Very High</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Max Temperature -->
+          <div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Max Temp (Tmax)</span>
+              <span class="material-symbols-outlined text-[18px] text-error">thermostat</span>
+            </div>
+            <div class="my-1.5">
+              <div class="flex items-baseline gap-1">
+                <span class="text-[28px] leading-none font-bold text-on-surface font-mono tracking-tight" id="kpiTmaxVal">34.6</span>
+                <span class="text-[12px] font-sans font-medium text-on-surface-variant">°C</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-error font-medium font-mono mt-1" id="kpiTmaxDiffTag">
+                <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                <span>+1.8°C vs coarse grid</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 font-mono text-[11px] text-on-surface-variant">
+              <span>Peak Window</span>
+              <span class="text-on-surface font-semibold">14:30 IST</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Min Temperature -->
+          <div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Min Temp (Tmin)</span>
+              <span class="material-symbols-outlined text-[18px] text-tertiary-container">device_thermostat</span>
+            </div>
+            <div class="my-1.5">
+              <div class="flex items-baseline gap-1">
+                <span class="text-[28px] leading-none font-bold text-on-surface font-mono tracking-tight" id="kpiTminVal">24.1</span>
+                <span class="text-[12px] font-sans font-medium text-on-surface-variant">°C</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-secondary font-medium font-mono mt-1">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                <span>Night cooling: Normal</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 font-mono text-[11px] text-on-surface-variant">
+              <span>Diurnal Delta</span>
+              <span class="text-on-surface font-semibold" id="kpiDiurnalDelta">Δ 10.5°C</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Relative Humidity -->
+          <div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Humidity (RH)</span>
+              <span class="material-symbols-outlined text-[18px] text-primary">humidity_high</span>
+            </div>
+            <div class="my-1.5">
+              <div class="flex items-baseline gap-1">
+                <span class="text-[28px] leading-none font-bold text-primary font-mono tracking-tight" id="kpiRhVal">84</span>
+                <span class="text-[12px] font-sans font-medium text-on-surface-variant">%</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-on-surface-variant font-mono mt-1">
+                <span>Dew Point: <strong class="text-on-surface" id="kpiDewPoint">22.4°C</strong></span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 font-mono text-[11px]">
+              <span class="text-on-surface-variant">Fungal Risk</span>
+              <span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold" id="kpiFungalRiskBadge">Moderate</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Wind Vector -->
+          <div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Wind Vector</span>
+              <span class="material-symbols-outlined text-[18px] text-primary">navigation</span>
+            </div>
+            <div class="my-1.5">
+              <div class="flex items-baseline gap-1">
+                <span class="text-[28px] leading-none font-bold text-on-surface font-mono tracking-tight" id="kpiWindVal">16</span>
+                <span class="text-[12px] font-sans font-medium text-on-surface-variant">km/h</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-on-surface-variant font-mono mt-1">
+                <span>WSW (245°) · Gusts 26</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 font-mono text-[11px]">
+              <span class="text-on-surface-variant">Spraying Ops</span>
+              <span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-bold" id="kpiSprayBadge">Safe (&lt;20)</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Ensemble Trust Index -->
+          <div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs border border-outline-variant/30 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">ML Trust Index</span>
+              <span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+            </div>
+            <div class="my-1.5">
+              <div class="flex items-baseline gap-1">
+                <span class="text-[28px] leading-none font-bold text-secondary font-mono tracking-tight" id="kpiTrustVal">82</span>
+                <span class="text-[12px] font-sans font-medium text-on-surface-variant">%</span>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-on-surface-variant font-mono mt-1">
+                <span>P10–P90: 38–45 mm</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 font-mono text-[11px]">
+              <span class="text-on-surface-variant">Residual Spread</span>
+              <span class="text-primary font-bold" id="kpiSpreadVal">±3.4 mm</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- TWO-COLUMN MIDDLE OPERATIONAL WORKBENCH (8 cols / 4 cols) -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          
+          <!-- LEFT COLUMN: Interactive GIS Panchayat Polygon Mesh (8 cols) -->
+          <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden flex flex-col">
+            
+            <!-- Map Header Toolbar -->
+            <div class="p-4 bg-surface-container-low flex flex-wrap items-center justify-between gap-3 border-b border-outline-variant/20">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[20px]">layers</span>
+                <div>
+                  <h3 class="font-bold text-[15px] text-primary" id="gisMeshHeading">Micro-Climatic Panchayat Polygon Mesh</h3>
+                  <p class="text-[11px] text-on-surface-variant" id="gisMeshSub">Vedasandur Taluk Boundary · Orographic Relief Integration</p>
+                </div>
+              </div>
+
+              <!-- Layer Buttons & Real Map Jump -->
+              <div class="flex items-center gap-2">
+                <div class="flex items-center bg-surface-container-highest p-0.5 rounded-lg text-[12px]">
+                  <button class="gis-layer-btn active px-2.5 py-1 rounded-md bg-primary-container text-white font-semibold shadow-xs" data-layer="rainfall">Rainfall (mm)</button>
+                  <button class="gis-layer-btn px-2.5 py-1 rounded-md text-on-surface hover:text-primary transition-colors font-medium" data-layer="temperature">Temp (°C)</button>
+                  <button class="gis-layer-btn px-2.5 py-1 rounded-md text-on-surface hover:text-primary transition-colors font-medium" data-layer="humidity">RH (%)</button>
+                  <button class="gis-layer-btn px-2.5 py-1 rounded-md text-on-surface hover:text-primary transition-colors font-medium" data-layer="ndvi">NDVI / Soil</button>
+                </div>
+                <button id="btnJumpToRealGisMap" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-xs cursor-pointer transition-colors" title="Switch to Real GIS Satellite & Street Map">
+                  <span class="material-symbols-outlined text-[14px]">map</span>
+                  <span>Real GIS Map ↗</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- SVG Map Canvas with Overlays -->
+            <div class="relative w-full h-[400px] bg-surface-container flex items-center justify-center overflow-hidden select-none">
+              
+              <svg id="gisCanvas" class="w-full h-full object-cover transition-transform duration-300" viewBox="0 0 960 480">
+                <!-- Group with offset to ensure perfect margin from floating card -->
+                <g transform="translate(150, 0)">
+                  <!-- Topographic Contour Lines -->
+                  <g fill="none" opacity="0.4" stroke="#cbd5e1" stroke-dasharray="3 3" stroke-width="1">
+                    <ellipse cx="280" cy="180" rx="220" ry="140"></ellipse>
+                    <ellipse cx="290" cy="175" rx="170" ry="100"></ellipse>
+                    <ellipse cx="310" cy="170" rx="110" ry="70"></ellipse>
+                    <ellipse cx="320" cy="165" rx="60" ry="40"></ellipse>
+                  </g>
+
+                  <!-- Kudaganar River Trace -->
+                  <path d="M 80,480 C 180,390 290,320 370,240 S 520,110 650,0" fill="none" opacity="0.6" stroke="#93ccff" stroke-linecap="round" stroke-width="3"></path>
+                  <text fill="#003c5e" font-family="Inter" font-size="10" font-style="italic" opacity="0.8" x="380" y="235">Kudaganar Basin Drainage</text>
+
+                  <!-- Polygons -->
+                  <!-- Polygon 1: Kovilur / GP 1 -->
+                  <path id="poly-kovilur" data-gpid="DEMO_KOVILUR" class="panchayat-polygon cursor-pointer selected-poly transition-all" d="M 180,80 L 340,60 L 410,170 L 330,260 L 210,240 L 150,150 Z" fill="#0f3b60" fill-opacity="0.88" stroke="#ffffff" stroke-width="2.5"></path>
+                  <text id="title-poly-1" fill="#ffffff" font-family="Inter" font-size="14" font-weight="700" text-anchor="middle" x="265" y="155">Kovilur (கோவிலூர்)</text>
+                  <text id="lbl-kovilur" fill="#cce5ff" font-family="JetBrains Mono" font-size="12" text-anchor="middle" x="265" y="172">41 mm · Heavy</text>
+
+                  <!-- Polygon 2: Vedasandur Town / GP 2 -->
+                  <path id="poly-vedasandur" data-gpid="DEMO_VEDA_TOWN" class="panchayat-polygon cursor-pointer transition-all" d="M 340,60 L 500,50 L 540,180 L 410,170 Z" fill="#21496f" fill-opacity="0.8" stroke="#ffffff" stroke-width="1.5"></path>
+                  <text id="title-poly-2" fill="#ffffff" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle" x="440" y="115">Vedasandur Town</text>
+                  <text id="lbl-vedasandur" fill="#eaedff" font-family="JetBrains Mono" font-size="11" text-anchor="middle" x="440" y="130">34 mm</text>
+
+                  <!-- Polygon 3: Nagayakottai / GP 3 -->
+                  <path id="poly-nagayakottai" data-gpid="DEMO_NAGAYAKOTTAI" class="panchayat-polygon cursor-pointer transition-all" d="M 410,170 L 540,180 L 580,310 L 450,330 L 330,260 Z" fill="#3c6188" fill-opacity="0.75" stroke="#ffffff" stroke-width="1.5"></path>
+                  <text id="title-poly-3" fill="#ffffff" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle" x="460" y="245">Nagayakottai</text>
+                  <text id="lbl-nagayakottai" fill="#faf8ff" font-family="JetBrains Mono" font-size="11" text-anchor="middle" x="460" y="260">26 mm</text>
+
+                  <!-- Polygon 4: Eriodu / GP 4 -->
+                  <path id="poly-eriodu" data-gpid="DEMO_ERIODU" class="panchayat-polygon cursor-pointer transition-all" d="M 210,240 L 330,260 L 450,330 L 390,440 L 230,410 Z" fill="#006c4a" fill-opacity="0.75" stroke="#ffffff" stroke-width="1.5"></path>
+                  <text id="title-poly-4" fill="#ffffff" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle" x="320" y="340">Eriodu (எரியோடு)</text>
+                  <text id="lbl-eriodu" fill="#82f5c1" font-family="JetBrains Mono" font-size="11" text-anchor="middle" x="320" y="355">19 mm</text>
+
+                  <!-- Polygon 5: Marambadi / GP 5 -->
+                  <path id="poly-marambadi" data-gpid="DEMO_MARAMBADI" class="panchayat-polygon cursor-pointer transition-all" d="M 540,180 L 700,140 L 730,280 L 580,310 Z" fill="#004b73" fill-opacity="0.65" stroke="#ffffff" stroke-width="1.5"></path>
+                  <text id="title-poly-5" fill="#ffffff" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle" x="630" y="225">Marambadi</text>
+                  <text id="lbl-marambadi" fill="#dae2fd" font-family="JetBrains Mono" font-size="11" text-anchor="middle" x="630" y="240">22 mm</text>
+
+                  <!-- Polygon 6: Kalvarpatti / GP 6 -->
+                  <path id="poly-kalvarpatti" data-gpid="DEMO_KALVARPATTI" class="panchayat-polygon cursor-pointer transition-all" d="M 450,330 L 580,310 L 730,280 L 690,420 L 490,440 Z" fill="#00714e" fill-opacity="0.6" stroke="#ffffff" stroke-width="1.5"></path>
+                  <text id="title-poly-6" fill="#ffffff" font-family="Inter" font-size="12" font-weight="600" text-anchor="middle" x="580" y="365">Kalvarpatti</text>
+                  <text id="lbl-kalvarpatti" fill="#85f8c4" font-family="JetBrains Mono" font-size="11" text-anchor="middle" x="580" y="380">16 mm</text>
+
+                  <!-- Weather Station Marker -->
+                  <g transform="translate(290, 195)">
+                    <circle cx="0" cy="0" fill="#ffffff" r="7" stroke="#ba1a1a" stroke-width="2.5"></circle>
+                    <circle cx="0" cy="0" fill="#ba1a1a" r="3"></circle>
+                  </g>
+                </g>
+              </svg>
+
+              <!-- Floating Map Detail Card: Active Drilldown -->
+              <div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-md p-3 rounded-xl shadow-md max-w-[260px] pointer-events-auto border border-surface-container-high">
+                <div class="flex items-center justify-between pb-1.5 border-b border-outline-variant/15">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+                    <span class="font-bold text-[13px] text-primary truncate" id="floatingCardName">Kovilur Panchayat</span>
+                  </div>
+                  <span class="font-mono text-[9px] bg-error-container text-on-error-container px-1.5 py-0.5 rounded font-bold shrink-0" id="floatingCardAws">AWS #TN-882</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 my-2 bg-surface-container-low p-2 rounded-lg">
+                  <div>
+                    <span class="text-on-surface-variant block uppercase text-[9px] font-bold">Downscaled Rain</span>
+                    <span class="font-mono font-bold text-error text-[18px] leading-tight" id="floatingCardRain">41.0 <span class="text-[11px] font-normal text-on-surface font-sans">mm</span></span>
+                  </div>
+                  <div>
+                    <span class="text-on-surface-variant block uppercase text-[9px] font-bold">Ensemble Conf.</span>
+                    <span class="font-mono font-bold text-secondary text-[18px] leading-tight" id="floatingCardConf">89% <span class="text-[10px] font-normal text-on-surface font-sans">High</span></span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between gap-2 text-[11px] pt-1 border-t border-outline-variant/15">
+                  <span class="font-mono text-on-surface-variant text-[10.5px]" id="floatingCardTempRh">Tmax: <strong class="text-on-surface">31.8°C</strong> · RH: <strong class="text-on-surface">88%</strong></span>
+                  <span class="text-error font-bold px-1.5 py-0.5 rounded bg-error-container text-[10px] shrink-0 uppercase tracking-wide" id="floatingCardAlertTag">Drainage Alert</span>
+                </div>
+              </div>
+
+              <!-- Floating Rain Intensity Color Legend -->
+              <div class="absolute bottom-3 right-3 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-2 rounded-lg shadow-xs flex flex-col gap-1 pointer-events-auto border border-surface-container-high">
+                <span class="text-on-surface-variant uppercase text-[10px] font-bold" id="legendTitle">Rainfall Gradient (mm / 24h)</span>
+                <div class="flex items-center gap-1" id="legendBarContainer">
+                  <div class="flex flex-col items-center">
+                    <div class="w-8 h-2.5 rounded-sm bg-[#00714e]"></div>
+                    <span class="font-mono text-[9px] text-on-surface-variant mt-0.5">0–15</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-8 h-2.5 rounded-sm bg-[#006c4a]"></div>
+                    <span class="font-mono text-[9px] text-on-surface-variant mt-0.5">15–25</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-8 h-2.5 rounded-sm bg-[#3c6188]"></div>
+                    <span class="font-mono text-[9px] text-on-surface-variant mt-0.5">25–35</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-8 h-2.5 rounded-sm bg-[#21496f]"></div>
+                    <span class="font-mono text-[9px] text-on-surface-variant mt-0.5">35–40</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="w-8 h-2.5 rounded-sm bg-[#0f3b60]"></div>
+                    <span class="font-mono text-[9px] text-on-surface-variant mt-0.5">&gt;40</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Map Footer Quick Metrics -->
+            <div class="p-3 bg-surface-container-lowest flex items-center justify-between text-on-surface-variant text-[12px] border-t border-outline-variant/15">
+              <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px] text-primary">pin_drop</span>
+                <span id="mapFooterCoords">Centroid: 10.528°N, 77.954°E · Elevation 278m ASL</span>
+              </div>
+              <span class="font-mono text-[11px] text-secondary font-bold" id="mapFooterResidualTag">Topo-Residuals: +6.2mm amplified via Palani Gap</span>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Priority Agro-Met Alerts (4 cols) -->
+          <div class="lg:col-span-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-4 flex flex-col gap-3">
+            <div class="flex items-center justify-between pb-1 border-b border-outline-variant/15">
+              <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-error text-[20px]">notifications_active</span>
+                <h3 class="font-bold text-[15px] text-primary">Agro-Advisory Protocols</h3>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-mono text-[11px] font-bold">4 Active Flags</span>
+            </div>
+
+            <div class="flex flex-col gap-2.5">
+              
+              <!-- Flag 1: Heavy Rainfall (Urgent Red) -->
+              <div class="relative pl-3 bg-surface-container-low rounded-lg p-2.5 shadow-xs overflow-hidden border border-outline-variant/15">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] uppercase text-error font-bold tracking-wider">Urgent Action • 36h Horizon</span>
+                  <span class="font-mono text-[10px] text-on-surface-variant font-medium">Flag #1</span>
+                </div>
+                <h4 class="text-[13px] font-bold text-on-surface">Heavy Rainfall Warning (அதி தீவிர மழை)</h4>
+                <p class="text-[12px] text-on-surface-variant mt-0.5">
+                  40+ mm expected in Kovilur &amp; northern reaches within 36 hrs. High surface runoff hazard on low-lying bunds.
+                </p>
+                <div class="mt-2 p-2 rounded bg-surface-container-lowest text-[11px] text-primary leading-relaxed">
+                  <strong>Mandatory Protocol:</strong> Clear field drainage channels in Samba paddy and groundnut nurseries immediately. Prevent water stagnancy.
+                </div>
+              </div>
+
+              <!-- Flag 2: Postpone Fertilizer (Agronomic Amber) -->
+              <div class="relative pl-3 bg-surface-container-low rounded-lg p-2.5 shadow-xs overflow-hidden border border-outline-variant/15">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] uppercase text-amber-700 font-bold tracking-wider">Agronomic Advisory</span>
+                  <span class="font-mono text-[10px] text-on-surface-variant font-medium">Flag #2</span>
+                </div>
+                <h4 class="text-[13px] font-bold text-on-surface">Postpone Fertilizer (உரமிடுவதை ஒத்திவைக்க)</h4>
+                <p class="text-[12px] text-on-surface-variant mt-0.5">
+                  High percolation &amp; runoff will cause rapid urea and DAP leaching.
+                </p>
+                <div class="mt-2 p-2 rounded bg-surface-container-lowest text-[11px] text-on-surface leading-relaxed">
+                  <strong>Action:</strong> Suspend top-dressing in paddy &amp; maize till convective front subsides. Safe window: <strong>27 Oct Morning</strong>.
+                </div>
+              </div>
+
+              <!-- Flag 3: Irrigation Reduced (Teal) -->
+              <div class="relative pl-3 bg-surface-container-low rounded-lg p-2.5 shadow-xs overflow-hidden border border-outline-variant/15">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] uppercase text-secondary font-bold tracking-wider">Water &amp; Power Saving</span>
+                  <span class="font-mono text-[10px] text-on-surface-variant font-medium">Flag #3</span>
+                </div>
+                <h4 class="text-[13px] font-bold text-on-surface">Irrigation Requirement Reduced (பாசனம் தவிர்த்தல்)</h4>
+                <p class="text-[12px] text-on-surface-variant mt-0.5">
+                  Soil moisture saturation index projected &gt;85% throughout block.
+                </p>
+                <div class="mt-2 p-2 rounded bg-surface-container-lowest text-[11px] text-secondary font-semibold leading-relaxed">
+                  <strong>Action:</strong> Suspend canal releases and electric borewell pumping for the next 72 hours. Conserve groundwater.
+                </div>
+              </div>
+
+              <!-- Flag 4: Fungal Risk (Crop Protection Indigo) -->
+              <div class="relative pl-3 bg-surface-container-low rounded-lg p-2.5 shadow-xs overflow-hidden border border-outline-variant/15">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary-container"></div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] uppercase text-tertiary-container font-bold tracking-wider">Crop Disease Surveillance</span>
+                  <span class="font-mono text-[10px] text-on-surface-variant font-medium">Flag #4</span>
+                </div>
+                <h4 class="text-[13px] font-bold text-on-surface">Fungal Blast Risk (குலை நோய் எச்சரிக்கை)</h4>
+                <p class="text-[12px] text-on-surface-variant mt-0.5">
+                  RH &gt;85% coupled with 28–32°C canopy microclimate favors blast incidence in early tillering Samba paddy.
+                </p>
+                <div class="mt-2 p-2 rounded bg-surface-container-lowest text-[11px] text-on-surface leading-relaxed">
+                  <strong>TNAU Guidance:</strong> Keep Tricyclazole 75 WP (0.6g/L) on standby; apply immediately once leaves dry post-shower.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- TWO-COLUMN BOTTOM WORKBENCH (8 cols Table / 4 cols SHAP Attribution) -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          
+          <!-- LEFT COLUMN: 5-Day Disaggregated Forecast Table (8 cols) -->
+          <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-4 flex flex-col gap-3">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-1 border-b border-outline-variant/15">
+              <div>
+                <h3 class="font-bold text-[15px] text-primary" id="forecastTableHeading">Disaggregated Forecast Across Panchayats</h3>
+                <p class="text-[11px] text-on-surface-variant">Village-level predictive spread for the upcoming 72 hours</p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2">
+                <!-- Crop Filter Tabs -->
+                <div class="flex items-center bg-surface-container p-0.5 rounded-lg text-[11px]">
+                  <button class="px-2 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-xs">All Crops</button>
+                  <button class="px-2 py-1 text-on-surface-variant hover:text-primary">Paddy (சம்பா)</button>
+                  <button class="px-2 py-1 text-on-surface-variant hover:text-primary">Maize (மக்கா)</button>
+                  <button class="px-2 py-1 text-on-surface-variant hover:text-primary">Cotton (பருத்தி)</button>
+                </div>
+
+                <!-- Export Dataset Button -->
+                <button id="btnExportForecastCsv" class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high transition-colors text-[11px] font-bold">
+                  <span class="material-symbols-outlined text-[15px]">file_download</span>
+                  <span>CSV / GeoJSON</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Table View -->
+            <div class="overflow-x-auto max-h-[420px] overflow-y-auto no-scrollbar">
+              <table class="w-full text-left border-collapse" id="panchayatForecastTable">
+                <thead class="sticky top-0 bg-surface-container-lowest z-10">
+                  <tr class="bg-surface-container-low text-on-surface-variant text-[10px] uppercase font-bold tracking-wider border-b border-outline-variant/20">
+                    <th class="py-2.5 px-3 rounded-l">Panchayat Name</th>
+                    <th class="py-2.5 px-3">Rainfall (48h)</th>
+                    <th class="py-2.5 px-3">Rain Trend</th>
+                    <th class="py-2.5 px-3">Temp Range</th>
+                    <th class="py-2.5 px-3">RH (%)</th>
+                    <th class="py-2.5 px-3">Confidence</th>
+                    <th class="py-2.5 px-3 rounded-r text-right">Agro Action</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/15 text-[12px]" id="panchayatTableBody">
+                  <!-- Populated dynamically via app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: SHAP Model Attribution Card (4 cols) -->
+          <div class="lg:col-span-4 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-4 flex flex-col justify-between gap-3">
+            <div>
+              <div class="flex items-center justify-between pb-2 border-b border-outline-variant/15">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-primary text-[19px]">psychology</span>
+                  <h3 class="font-bold text-[14px] text-primary">SHAP Model Attribution</h3>
+                </div>
+                <span class="font-mono text-[11px] text-on-surface-variant font-semibold" id="shapPanchayatTag">Kovilur Anomaly</span>
+              </div>
+              
+              <p class="text-[12px] text-on-surface-variant mt-2 leading-relaxed">
+                Feature contribution to <strong class="text-primary" id="shapVarianceText">+13.0 mm</strong> downscaling variance against regional baseline:
+              </p>
+
+              <!-- Feature Bars -->
+              <div class="flex flex-col gap-2.5 pt-2 font-mono text-[11px]">
+                <div>
+                  <div class="flex items-center justify-between pb-0.5">
+                    <span class="text-on-surface font-sans">Topographic Elevation (SRTM 30m)</span>
+                    <span class="text-error font-bold" id="shapElevVal">+6.2 mm</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+                    <div id="shapElevBar" class="h-full rounded-full bg-error" style="width: 48%;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex items-center justify-between pb-0.5">
+                    <span class="text-on-surface font-sans">Kudaganar Basin Orography</span>
+                    <span class="text-error font-bold">+3.1 mm</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+                    <div class="h-full rounded-full bg-error" style="width: 24%;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex items-center justify-between pb-0.5">
+                    <span class="text-on-surface font-sans">Sentinel-2 NDVI Canopy Wetness</span>
+                    <span class="text-error font-bold">+2.4 mm</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+                    <div class="h-full rounded-full bg-error" style="width: 18%;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex items-center justify-between pb-0.5">
+                    <span class="text-on-surface font-sans">MODIS Land Cover Roughness</span>
+                    <span class="text-secondary font-bold">-1.8 mm</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+                    <div class="h-full rounded-full bg-secondary" style="width: 14%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Weights & Loss Footer -->
+            <div class="p-2 rounded bg-surface-container-low flex items-center justify-between text-[11px] font-mono text-on-surface-variant border border-outline-variant/15">
+              <span>Ensemble: <strong>LightGBM (60%) + WRF (40%)</strong></span>
+              <span class="text-secondary font-bold">Loss: 0.041 MSE</span>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 2: PANCHAYAT MAP TAB (SYNCHRONIZED DUAL GIS LEAFLET MAPS) -->
+      <!-- ===================================================================== -->
+      <div id="tabPanchayatMap" class="tab-panel flex flex-col w-full gap-4 pb-12">
+        <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">layers</span>
+              <span class="font-bold text-[13px] text-primary">Variable:</span>
+              <select id="mapVarSelect" class="bg-surface-container-low text-primary font-bold px-3 py-1.5 rounded-lg border border-outline-variant/30 focus:outline-none">
+                <option value="tmax" selected>Maximum Temperature (Tmax)</option>
+                <option value="tmin">Minimum Temperature (Tmin)</option>
+                <option value="rain_amount">Precipitation / Rain (mm)</option>
+                <option value="rh">Relative Humidity (RH %)</option>
+                <option value="wind">Wind Speed (km/h)</option>
+              </select>
+            </div>
+
+            <!-- Real Map Style Switcher -->
+            <div class="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1.5 rounded-lg border border-outline-variant/30">
+              <span class="material-symbols-outlined text-primary text-[17px]">satellite_alt</span>
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase">Style:</span>
+              <select id="mapStyleSelect" class="bg-transparent text-primary font-bold text-[12px] focus:outline-none cursor-pointer">
+                <option value="dark" selected>Dark Canvas (Esri)</option>
+                <option value="satellite">Real Satellite (Esri Imagery)</option>
+                <option value="osm">Street Map (OpenStreetMap)</option>
+                <option value="topo">Terrain / Topo (Esri Topo)</option>
+              </select>
+            </div>
+
+            <!-- Locate Me Button -->
+            <button id="mapLiveLocationBtn" class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-xs cursor-pointer transition-colors" title="Center map on your real-time GPS coordinates">
+              <span class="material-symbols-outlined text-[15px]">my_location</span>
+              <span>Find My Location</span>
+            </button>
+
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">search</span>
+              <input type="text" id="mapPanchayatSearch" placeholder="Filter panchayat..." class="bg-surface-container-low text-primary px-3 py-1 rounded-lg border border-outline-variant/30 w-36 focus:outline-none"/>
+            </div>
+          </div>
+
+          <!-- 5-Day Lead Time Slider -->
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] font-bold text-on-surface-variant uppercase">Forecast Day:</span>
+            <div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30">
+              <button class="lead-day-btn active px-3 py-1 rounded-lg font-mono text-[11px] font-bold bg-primary text-white" data-day="1">Day 1</button>
+              <button class="lead-day-btn px-3 py-1 rounded-lg font-mono text-[11px] font-bold text-on-surface-variant hover:text-on-surface" data-day="2">Day 2</button>
+              <button class="lead-day-btn px-3 py-1 rounded-lg font-mono text-[11px] font-bold text-on-surface-variant hover:text-on-surface" data-day="3">Day 3</button>
+              <button class="lead-day-btn px-3 py-1 rounded-lg font-mono text-[11px] font-bold text-on-surface-variant hover:text-on-surface" data-day="4">Day 4</button>
+              <button class="lead-day-btn px-3 py-1 rounded-lg font-mono text-[11px] font-bold text-on-surface-variant hover:text-on-surface" data-day="5">Day 5</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-xs overflow-hidden flex flex-col">
+            <div class="p-3 bg-surface-container-low flex items-center justify-between border-b border-outline-variant/20">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                <span class="font-bold text-[13px] text-primary">Coarse Block NWP (ECMWF IFS 9 km)</span>
+              </div>
+              <span class="font-mono text-[11px] text-on-surface-variant">Uniform Areal Mean</span>
+            </div>
+            <div id="mapBlockContainer" class="w-full h-[520px] bg-slate-900"></div>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-xs overflow-hidden flex flex-col">
+            <div class="p-3 bg-surface-container-low flex items-center justify-between border-b border-outline-variant/20">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                <span class="font-bold text-[13px] text-primary">VaanVizhi ML Downscaled (1.0 km² Gridded Mesh)</span>
+              </div>
+              <span class="font-mono text-[11px] text-secondary font-bold">130 Panchayats</span>
+            </div>
+            <div id="mapPanchayatContainer" class="w-full h-[520px] bg-slate-900"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 3: FORECAST ANALYSIS TAB (QUANTILE RIBBON & SHAP DRIVERS) -->
+      <!-- ===================================================================== -->
+      <div id="tabForecast" class="tab-panel flex flex-col w-full gap-4 pb-12">
+        <div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">air</span>
+            </div>
+            <div>
+              <h2 class="text-[17px] font-bold text-primary">5-Day Multi-Quantile Uncertainty Forecast</h2>
+              <p class="text-[12px] text-on-surface-variant">Calibrated p10 (10th percentile), p50 (median), and p90 (90th percentile) confidence envelope</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 flex-wrap">
+            <div class="flex items-center gap-2">
+              <span class="text-[12px] text-on-surface-variant font-medium">Select Panchayat:</span>
+              <select id="forecastGpSelect" class="bg-surface-container-low text-primary font-bold px-3 py-1.5 rounded-lg border border-outline-variant/30 focus:outline-none"></select>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[12px] text-on-surface-variant font-medium">Variable:</span>
+              <select id="forecastVarSelect" class="bg-surface-container-low text-primary font-bold px-3 py-1.5 rounded-lg border border-outline-variant/30 focus:outline-none">
+                <option value="tmax" selected>Max Temperature (Tmax)</option>
+                <option value="tmin">Min Temperature (Tmin)</option>
+                <option value="rain_amount">Precipitation Amount (mm)</option>
+                <option value="rh">Relative Humidity (%)</option>
+                <option value="wind">Wind Speed (km/h)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-8 bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col">
+            <div class="flex items-center justify-between pb-3 mb-2 border-b border-outline-variant/20">
+              <span class="font-bold text-[14px] text-primary" id="chartPanchayatTitle">Panchayat 5-Day Trajectory</span>
+              <div class="flex items-center gap-3 font-mono text-[11px]">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-1 bg-secondary rounded"></span><span>p50 Median</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-secondary-fixed/40 border border-secondary rounded"></span><span>80% Coverage (p10–p90)</span></span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-1 border-b-2 border-dashed border-primary"></span><span>Raw Coarse NWP</span></span>
+              </div>
+            </div>
+            <div class="w-full h-80 relative">
+              <canvas id="quantileForecastChart"></canvas>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 flex flex-col gap-4">
+            <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-2.5">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[20px]">psychology</span>
+                <h3 class="text-[15px] font-bold text-primary">Microclimatic Drivers (SHAP)</h3>
+              </div>
+              <p class="text-[12px] text-on-surface-variant leading-relaxed">
+                Why does this Gram Panchayat differ from the NWP Block average? Key localized environmental covariates:
+              </p>
+              <div class="flex flex-col gap-2 mt-1" id="shapDriversList"></div>
+            </div>
+
+            <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-2">
+              <h4 class="text-[12px] font-bold text-primary uppercase tracking-wider">Topographic Metadata</h4>
+              <div class="grid grid-cols-2 gap-2 font-mono text-[11px]">
+                <div class="bg-surface-container-low p-2 rounded-lg">
+                  <span class="text-on-surface-variant block text-[10px]">Elevation</span>
+                  <span class="font-bold text-primary text-[13px]" id="metaElev">284 m</span>
+                </div>
+                <div class="bg-surface-container-low p-2 rounded-lg">
+                  <span class="text-on-surface-variant block text-[10px]">Lapse Rate Cooling</span>
+                  <span class="font-bold text-secondary text-[13px]" id="metaLapse">-0.8°C</span>
+                </div>
+                <div class="bg-surface-container-low p-2 rounded-lg">
+                  <span class="text-on-surface-variant block text-[10px]">Tree Cover</span>
+                  <span class="font-bold text-primary text-[13px]" id="metaTree">24%</span>
+                </div>
+                <div class="bg-surface-container-low p-2 rounded-lg">
+                  <span class="text-on-surface-variant block text-[10px]">Water Proximity</span>
+                  <span class="font-bold text-primary text-[13px]" id="metaWater">420 m</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 4: AGRO ADVISORY TAB (FARMER PHONE SIMULATOR & DLT SMS) -->
+      <!-- ===================================================================== -->
+      <div id="tabAdvisory" class="tab-panel flex flex-col w-full gap-4 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 flex flex-col gap-4">
+            <div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-4">
+              <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+                    <span class="material-symbols-outlined text-[22px]">agriculture</span>
+                  </div>
+                  <div>
+                    <h2 class="text-[17px] font-bold text-primary">TNAU / ICAR Crop Advisory Engine</h2>
+                    <p class="text-[12px] text-on-surface-variant">Validated agronomic rules matched to hyperlocal microclimate triggers</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-mono text-[11px] font-bold">TRAI DLT Verified</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1">
+                  <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider" for="advisoryCropSelect">Target Signature Crop</label>
+                  <select id="advisoryCropSelect" class="bg-surface-container-low text-primary font-bold text-[13px] px-3 py-2 rounded-lg border border-outline-variant/30 focus:outline-none">
+                    <option value="banana" selected>Banana / வாழை (G9 Cavendish / Poovan)</option>
+                    <option value="grapes">Grapes / திராட்சை (Cumbum Muscat Hamburg)</option>
+                    <option value="paddy">Paddy / சம்பா நெல் (CR 1009 / BPT 5204)</option>
+                    <option value="cotton">Cotton / பருத்தி (MCU 5 / Bt Hybrid)</option>
+                    <option value="coconut">Coconut / தென்னை (Tall x Dwarf)</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider" for="advisoryStageSelect">Phenological Stage</label>
+                  <select id="advisoryStageSelect" class="bg-surface-container-low text-primary font-bold text-[13px] px-3 py-2 rounded-lg border border-outline-variant/30 focus:outline-none">
+                    <option value="vegetative" selected>Vegetative Growth</option>
+                    <option value="flowering">Flowering / Bunch Emergence</option>
+                    <option value="fruiting">Fruiting / Grain Filling</option>
+                    <option value="harvesting">Maturity / Harvest Phase</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="bg-surface-container-low p-3.5 rounded-xl border border-outline-variant/20 text-[12px] leading-relaxed" id="advisoryRulesText">
+                • <strong>High Wind Propping Rule:</strong> Forecast gusts &gt;20 km/h triggers immediate banana pseudostem propping (சவுக்குக்கம்பு முட்டுக் கொடுத்தல்).<br/>
+                • <strong>Spray Window Safety:</strong> Knapsack spray forbidden if wind &gt;15 km/h or rain probability &gt;60%.<br/>
+                • <strong>Citation:</strong> ICAR-NRCB Banana Agromet Protocol 2023 &amp; TNAU Agritech Portal CPG.
+              </div>
+
+              <div class="flex items-center justify-between pt-1 flex-wrap gap-2">
+                <span class="text-[11px] font-mono text-on-surface-variant">DLT Header: <strong>VK-AGROTN</strong> (Govt of Tamil Nadu)</span>
+                <div class="flex items-center gap-2">
+                  <button id="btnRegenerateAdvisory" class="px-3.5 py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-semibold text-[12px] border border-outline-variant/30 transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span class="material-symbols-outlined text-[17px]">autorenew</span>
+                    <span>Recalculate</span>
+                  </button>
+                  <button id="btnQuickDispatchLeft" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[12px] transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
+                    <span class="material-symbols-outlined text-[17px]">send</span>
+                    <span>Send Advisory</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==================== HYPERLOCAL LIVE RAIN & DIRECT SMS CARD ==================== -->
+            <div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-4">
+              <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-sky-500/15 text-sky-500 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[22px]">rainy</span>
+                  </div>
+                  <div>
+                    <h2 class="text-[16px] font-bold text-primary">Live Location Rain Forecast &amp; Direct SMS</h2>
+                    <p class="text-[12px] text-on-surface-variant">Real-time precipitation timing, hourly downpour curve, and cellular SIM SMS</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-mono text-[11px] font-bold border border-sky-500/20 flex items-center gap-1.5" id="rainLiveLocStatusBadge">
+                  <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                  <span id="rainLiveLocStatusText">Live Feed Active</span>
+                </span>
+              </div>
+
+              <!-- Location Picker Toolbar (GPS vs Given Location) -->
+              <div class="flex flex-col gap-2 bg-surface-container-low p-3.5 rounded-xl border border-outline-variant/20">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                  <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px] text-primary">pin_drop</span>
+                    <span>Target Advisory Location</span>
+                  </label>
+                  <div class="flex items-center gap-1.5">
+                    <button type="button" id="btnAdvisoryUseGps" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] flex items-center gap-1 transition-all shadow-xs cursor-pointer">
+                      <span class="material-symbols-outlined text-[14px]">my_location</span>
+                      <span>Use My Live GPS</span>
+                    </button>
+                    <button type="button" id="btnAdvisoryResetLoc" class="px-2.5 py-1 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-medium text-[11px] border border-outline-variant/30 transition-all cursor-pointer">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Location Search / Input -->
+                <div class="flex items-center gap-2">
+                  <div class="relative flex-1">
+                    <span class="absolute left-3 top-2.5 material-symbols-outlined text-[17px] text-on-surface-variant">search</span>
+                    <input type="text" id="advisoryLocationInput" placeholder="Enter given location (e.g. Theni, Kovilur, Bodinayakkanur, Madurai, or Lat,Lon)..." class="w-full pl-9 pr-3 py-2 bg-surface-container text-on-surface font-semibold text-[12px] rounded-lg border border-outline-variant/30 focus:outline-none focus:border-primary">
+                  </div>
+                  <button type="button" id="btnAdvisorySearchLoc" class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-white font-bold text-[12px] flex items-center gap-1 transition-all cursor-pointer shrink-0">
+                    <span class="material-symbols-outlined text-[16px]">travel_explore</span>
+                    <span>Check Rain</span>
+                  </button>
+                </div>
+
+                <!-- Active Location Details Strip -->
+                <div class="flex items-center justify-between text-[11px] font-mono text-on-surface-variant pt-1 px-1 flex-wrap gap-1">
+                  <span id="advisoryActiveLocName" class="font-bold text-primary flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px] text-emerald-500">check_circle</span>
+                    <span>Kovilur (Vedasandur Block)</span>
+                  </span>
+                  <span id="advisoryActiveLocCoords" class="text-on-surface-variant">10.0100°N, 77.4800°E · Elev: 284m</span>
+                </div>
+              </div>
+
+              <!-- Real-Time Rain & Weather Metrics Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <!-- Today's Rain Sum -->
+                <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col justify-between">
+                  <div class="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant flex items-center justify-between">
+                    <span>Expected Rain</span>
+                    <span class="material-symbols-outlined text-[16px] text-sky-500">water_drop</span>
+                  </div>
+                  <div class="mt-1">
+                    <div class="text-[20px] font-extrabold text-primary" id="rainCardSum">4.2 <span class="text-[12px] font-normal text-on-surface-variant">mm</span></div>
+                    <div class="text-[10px] font-semibold text-sky-600 dark:text-sky-400" id="rainCardCategory">Moderate Showers</div>
+                  </div>
+                </div>
+
+                <!-- Max Rain Probability -->
+                <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col justify-between">
+                  <div class="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant flex items-center justify-between">
+                    <span>Rain Probability</span>
+                    <span class="material-symbols-outlined text-[16px] text-emerald-500">percent</span>
+                  </div>
+                  <div class="mt-1">
+                    <div class="text-[20px] font-extrabold text-primary" id="rainCardProb">85<span class="text-[12px] font-normal text-on-surface-variant">%</span></div>
+                    <div class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400" id="rainCardRisk">High Rain Risk</div>
+                  </div>
+                </div>
+
+                <!-- Peak Rain Timing Window -->
+                <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col justify-between">
+                  <div class="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant flex items-center justify-between">
+                    <span>Peak Rain Timing</span>
+                    <span class="material-symbols-outlined text-[16px] text-amber-500">schedule</span>
+                  </div>
+                  <div class="mt-1">
+                    <div class="text-[13px] font-extrabold text-primary truncate" id="rainCardTiming">3:00 PM - 5:30 PM</div>
+                    <div class="text-[10px] font-mono text-on-surface-variant" id="rainCardPeakIntensity">Max 3.1 mm/hr</div>
+                  </div>
+                </div>
+
+                <!-- Microclimate Conditions -->
+                <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col justify-between">
+                  <div class="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant flex items-center justify-between">
+                    <span>Temp &amp; Wind</span>
+                    <span class="material-symbols-outlined text-[16px] text-secondary">thermostat</span>
+                  </div>
+                  <div class="mt-1">
+                    <div class="text-[13px] font-extrabold text-primary" id="rainCardTempWind">31.2°C · 16 km/h</div>
+                    <div class="text-[10px] font-mono text-on-surface-variant" id="rainCardRhDew">RH 78% · Dew 21°C</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hourly Rain Timeline & Prediction Curve -->
+              <div class="bg-surface-container-low p-3.5 rounded-xl border border-outline-variant/20 flex flex-col gap-2">
+                <div class="flex items-center justify-between flex-wrap gap-1">
+                  <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[15px] text-sky-500">waves</span>
+                    <span>Hourly Rain Progression (Next 24 Hours)</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-on-surface-variant" id="rainTimelineSummary">Rain peak between 14:00 and 18:00 IST</span>
+                </div>
+                <div id="rainHourlyBarsContainer" class="grid grid-cols-6 sm:grid-cols-12 gap-1.5 pt-1.5 pb-1">
+                  <!-- Dynamically populated 12 hours timeline bars -->
+                </div>
+                <!-- Impact Rule Banner -->
+                <div class="p-2.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-[11px] leading-relaxed flex items-start gap-2" id="rainAgronomicAdviceBox">
+                  <span class="material-symbols-outlined text-[17px] text-sky-500 shrink-0 mt-0.5">info</span>
+                  <span id="rainAgronomicAdviceText">
+                    <strong>விவசாய ஆலோசனை (Rain Rule):</strong> இன்று மாலை 3 மணி முதல் 5:30 மணி வரை கனமழை வாய்ப்புள்ளதால் (85%), வாழை மரங்களுக்கு சவுக்குக்கம்பு முட்டுக் கொடுத்து முறிவதைத் தடுக்கவும். பூச்சி மருந்து தெளிப்பதை ஒத்திவைக்கவும்.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Direct SMS Dispatch to Given Mobile Number -->
+              <div class="bg-gradient-to-br from-surface-container-low to-surface-container p-4 rounded-xl border border-outline-variant/30 flex flex-col gap-3">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">sms</span>
+                    <div>
+                      <h4 class="text-[13px] font-bold text-primary">Direct SMS Dispatch to Farmer Phone</h4>
+                      <p class="text-[11px] text-on-surface-variant">Send this live rain alert via cellular SMS (SIM) or official DLT gateway</p>
+                    </div>
+                  </div>
+                  <button type="button" id="btnToggleSmsApiSettings" class="text-[11px] text-on-surface-variant hover:text-primary font-mono flex items-center gap-1 cursor-pointer">
+                    <span class="material-symbols-outlined text-[15px]">settings</span>
+                    <span>Gateway Settings</span>
+                  </button>
+                </div>
+
+                <!-- Gateway Settings Panel (Collapsible) -->
+                <div id="smsGatewaySettingsPanel" class="hidden p-3 bg-surface-container-lowest rounded-xl border border-outline-variant/30 flex flex-col gap-2">
+                  <div class="flex items-center justify-between text-[11px] font-bold text-on-surface-variant">
+                    <span>SMS Gateway Provider</span>
+                    <span class="text-[10px] text-emerald-500 font-bold">Fast2SMS (India) / Native Cellular Intent</span>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input type="text" id="customSmsApiKeyInput" placeholder="Optional Fast2SMS API Key (leave empty for native SMS)" class="p-2 text-[11px] font-mono bg-surface-container-low rounded-lg border border-outline-variant/30 focus:outline-none text-on-surface">
+                    <div class="text-[10px] text-on-surface-variant flex items-center">
+                      If no API key is provided, the SMS triggers the native cellular SMS app on your phone/PC.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile Number Input and Direct Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div class="flex items-center gap-1.5 bg-surface-container-lowest px-3 py-2 rounded-xl border border-outline-variant/30 flex-1">
+                    <span class="text-[12px] font-bold text-on-surface-variant font-mono">🇮🇳 +91</span>
+                    <input type="tel" id="directFarmerMobileInput" placeholder="Enter 10-digit mobile number (e.g. 9842100000)" maxlength="10" class="w-full bg-transparent text-[13px] text-on-surface font-mono font-bold focus:outline-none placeholder:text-on-surface-variant/40">
+                  </div>
+
+                  <!-- Direct Send SMS Button -->
+                  <button type="button" id="btnSendDirectSmsNow" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-[12px] shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0">
+                    <span class="material-symbols-outlined text-[17px]">sms</span>
+                    <span>Send Real SMS</span>
+                  </button>
+
+                  <!-- Direct WhatsApp Button -->
+                  <button type="button" id="btnSendDirectWaNow" class="px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[12px] shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0">
+                    <span class="material-symbols-outlined text-[17px]">chat</span>
+                    <span>WhatsApp</span>
+                  </button>
+                </div>
+
+                <!-- Status Feedback Strip -->
+                <div id="directSmsFeedbackStrip" class="hidden p-2.5 rounded-lg text-[11px] font-mono flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                  <span id="directSmsFeedbackText" class="flex items-center gap-1.5 font-bold">
+                    <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                    <span>Dispatched!</span>
+                  </span>
+                  <a id="directSmsNativeLink" href="#" class="underline font-bold text-sky-400 hover:text-sky-300">Open in Messaging App</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30 mb-3">
+              <button id="btnPhoneSms" class="active px-3 py-1.5 rounded-lg text-[12px] font-bold bg-primary text-white transition-all">Tamil SMS (DLT)</button>
+              <button id="btnPhoneWa" class="px-3 py-1.5 rounded-lg text-[12px] font-medium text-on-surface-variant hover:text-on-surface transition-all">WhatsApp Card</button>
+              <button id="btnPhoneVoice" class="px-3 py-1.5 rounded-lg text-[12px] font-medium text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">volume_up</span>
+                <span>Voice TTS</span>
+              </button>
+            </div>
+
+            <!-- Realistic Smartphone Mockup -->
+            <div class="w-[300px] h-[560px] bg-slate-950 rounded-[40px] p-3 shadow-2xl border-4 border-slate-700 flex flex-col relative overflow-hidden">
+              <div class="w-full flex justify-center pb-2">
+                <div class="w-24 h-4 bg-slate-800 rounded-full flex items-center justify-end px-3">
+                  <div class="w-2 h-2 rounded-full bg-slate-900 border border-slate-700"></div>
+                </div>
+              </div>
+              <div class="flex-1 bg-slate-900 rounded-[28px] overflow-hidden flex flex-col text-slate-100 p-3 select-text">
+                <div id="phoneSmsView" class="flex flex-col h-full justify-between">
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-[11px]">VK</div>
+                        <div class="flex flex-col">
+                          <span class="font-bold text-[12px]">VK-AGROTN</span>
+                          <span class="text-[9px] text-slate-400 font-mono">DLT Header: 140716123456</span>
+                        </div>
+                      </div>
+                      <span class="text-[10px] text-slate-400 font-mono">06:15 AM</span>
+                    </div>
+                    <div class="bg-slate-800/90 border border-slate-700/80 p-3 rounded-2xl text-[12px] leading-relaxed text-slate-200 mt-2 font-sans shadow-xs" id="phoneSmsText">
+                      வானவிழி வேளாண் அறிக்கை: தேனி போடிநாயக்கனூர்-ல் 24 மணி நேரத்தில் பலத்த காற்று (28 கிமீ/ம) வீசக்கூடும். வாழைக்கு சவுக்குக்கம்பு முட்டுக் கொடுக்கவும். உரம் இடுவதை தள்ளிப்போடவும். -TNAU
+                    </div>
+                    <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                      <span id="smsLengthBadge">64 chars (Unicode Tamil)</span>
+                      <span class="text-emerald-400 font-bold" id="smsSegmentsBadge">1 Segment (&le;70 chars)</span>
+                    </div>
+                  </div>
+                  <div class="text-center text-[10px] text-slate-500 pb-1">TRAI DLT Telemetry Compliant</div>
+                </div>
+
+                <div id="phoneWaView" class="hidden flex flex-col h-full justify-between">
+                  <div class="flex items-center justify-between border-b border-emerald-900/60 pb-2">
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[11px]">🌱</div>
+                      <div class="flex flex-col">
+                        <span class="font-bold text-[12px]">VaanVizhi Farmer Alert</span>
+                        <span class="text-[9px] text-emerald-400">Official Agromet Channel</span>
+                      </div>
+                    </div>
+                    <span class="text-[10px] text-slate-400">06:15 AM</span>
+                  </div>
+                  <div class="bg-emerald-950/80 border border-emerald-800/60 p-3 rounded-2xl text-[12px] leading-relaxed text-emerald-100 my-auto shadow-xs" id="phoneWaText">
+                    🌿 <strong>வானவிழி வேளாண் ஆலோசனை</strong><br/>
+                    📍 <strong>பஞ்சாயத்து:</strong> கோவில்லூர்<br/>
+                    🌧️ <strong>மழை வாய்ப்பு:</strong> 78% (41 மி.மீ)<br/>
+                    ⚠️ <strong>முக்கிய எச்சரிக்கை:</strong> வடிகால் வாய்க்கால்களை தூர்வாரவும்.<br/>
+                    🧪 <strong>பூச்சி மருந்து:</strong> காற்று வேகம் குறைந்த பின் மாலை வேளையில் தெளிக்கவும்.
+                  </div>
+                  <div class="text-center text-[10px] text-emerald-500 pb-1">✓✓ Delivered to 1,240 Registered Farmers</div>
+                </div>
+              </div>
+              <div class="w-full flex justify-center pt-2">
+                <div class="w-28 h-1 bg-slate-600 rounded-full"></div>
+              </div>
+            </div>
+
+            <!-- Action Toolbar Under Phone Mockup -->
+            <div class="w-[300px] mt-3.5 flex flex-col gap-2">
+              <div class="grid grid-cols-2 gap-2">
+                <button id="btnQuickSendWa" class="px-3 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[12px] shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                  <span class="material-symbols-outlined text-[17px]">chat</span>
+                  <span>WhatsApp</span>
+                </button>
+                <button id="btnQuickSendSms" class="px-3 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-[12px] shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                  <span class="material-symbols-outlined text-[17px]">sms</span>
+                  <span>DLT SMS</span>
+                </button>
+              </div>
+              <button id="btnQuickBroadcast" class="w-full px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-[12px] shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer">
+                <span class="material-symbols-outlined text-[18px]">cell_tower</span>
+                <span>Broadcast to 1,240 Farmers</span>
+              </button>
+              <div class="flex items-center justify-between px-1 text-[11px] text-on-surface-variant">
+                <button id="btnCopyPhoneText" class="hover:text-primary flex items-center gap-1 font-semibold transition-colors cursor-pointer">
+                  <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                  <span id="btnCopyPhoneTextLabel">Copy Text</span>
+                </button>
+                <span class="font-mono text-[10px] text-emerald-500 font-bold flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  DLT Gateway Active
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 5: SPATIAL DISAGGREGATION DEEP DIVE TAB -->
+      <!-- ===================================================================== -->
+      <div id="tabSpatialDisaggregation" class="tab-panel flex flex-col w-full gap-4 pb-12">
+        <div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-4">
+          <div class="flex items-center gap-3 border-b border-outline-variant/20 pb-3">
+            <div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">layers</span>
+            </div>
+            <div>
+              <h2 class="text-[17px] font-bold text-primary">Spatial Reconciliation &amp; Mass Conservation Theory</h2>
+              <p class="text-[12px] text-on-surface-variant">Bridging the gap between 9 km coarse NWP and 1.0 km² panchayat realities</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20 flex flex-col gap-2">
+              <h4 class="font-bold text-[13px] text-primary">1. Additive Reconciliation (Temperature &amp; RH)</h4>
+              <p class="text-[12px] text-on-surface leading-relaxed">
+                $$\bar{T}_{block} = \frac{1}{\sum A_i} \sum_{i=1}^{N} A_i \cdot T_i$$
+                Ensures zero energy drift across the block domain while preserving microclimatic lapse-rate cooling along the Western Ghats slopes.
+              </p>
+            </div>
+
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20 flex flex-col gap-2">
+              <h4 class="font-bold text-[13px] text-primary">2. Expected-Value Precipitation Scaling</h4>
+              <p class="text-[12px] text-on-surface leading-relaxed">
+                $$\mathbb{E}[R_{block}] = \frac{1}{N} \sum_{i=1}^{N} (p_i \cdot \text{Amount}_i)$$
+                Solves convective rainfall clustering without violating regional hydrological forecasts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 6: MODEL INSIGHTS (ML) TAB -->
+      <!-- ===================================================================== -->
+      <div id="tabModelInsights" class="tab-panel flex flex-col w-full gap-4 pb-12">
+        <div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-4">
+          <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">psychology</span>
+              </div>
+              <div>
+                <h2 class="text-[17px] font-bold text-primary">Statistical Baseline Comparison (M0 vs M2 vs M3)</h2>
+                <p class="text-[12px] text-on-surface-variant">Evaluating 10-year test set (2024-2025) and Leave-One-Block-Out (LOBO) spatial generalization</p>
+              </div>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-mono text-[11px] font-bold">Physics-Guided ML</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-[12px]">
+              <thead>
+                <tr class="bg-surface-container-low text-on-surface-variant text-[10px] uppercase font-bold tracking-wider border-b border-outline-variant/20">
+                  <th class="py-2.5 px-3 rounded-l">Model Architecture</th>
+                  <th class="py-2.5 px-3">Tmax RMSE</th>
+                  <th class="py-2.5 px-3">Tmin RMSE</th>
+                  <th class="py-2.5 px-3">RH MAE</th>
+                  <th class="py-2.5 px-3">Rain Brier / F1</th>
+                  <th class="py-2.5 px-3 rounded-r">Conservation Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-outline-variant/15 font-mono">
+                <tr>
+                  <td class="py-3 px-3 font-sans"><strong>M0: Raw NWP Block Copy</strong><br/><span class="text-[10px] text-on-surface-variant">Direct copy of 9 km ECMWF IFS</span></td>
+                  <td class="py-3 px-3 text-error">2.41 °C</td>
+                  <td class="py-3 px-3 text-error">2.85 °C</td>
+                  <td class="py-3 px-3 text-error">9.2 %</td>
+                  <td class="py-3 px-3 text-error">0.241 / 0.52</td>
+                  <td class="py-3 px-3 text-on-surface-variant">Trivial (Areal identical)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-sans"><strong>M2: Adiabatic Lapse Rate</strong><br/><span class="text-[10px] text-on-surface-variant">Topographic adjustment (-6.5°C/km)</span></td>
+                  <td class="py-3 px-3 text-amber-600">1.34 °C</td>
+                  <td class="py-3 px-3 text-amber-600">1.52 °C</td>
+                  <td class="py-3 px-3 text-amber-600">6.4 %</td>
+                  <td class="py-3 px-3 text-amber-600">0.218 / 0.58</td>
+                  <td class="py-3 px-3 text-amber-600">Approximated</td>
+                </tr>
+                <tr class="bg-secondary-fixed/20 font-bold">
+                  <td class="py-3 px-3 font-sans"><span class="text-secondary font-bold">M3: VaanVizhi Multi-Quantile LightGBM</span><br/><span class="text-[10px] text-secondary font-normal">Regularized residual + Reconciled Mean</span></td>
+                  <td class="py-3 px-3 text-secondary">0.92 °C (-62%)</td>
+                  <td class="py-3 px-3 text-secondary">1.04 °C (-64%)</td>
+                  <td class="py-3 px-3 text-secondary">4.1 % (-55%)</td>
+                  <td class="py-3 px-3 text-secondary">0.142 / 0.74 (+42%)</td>
+                  <td class="py-3 px-3 text-secondary">Identically Conserved ✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 7: DATA & VALIDATION TAB -->
+      <!-- ===================================================================== -->
+      <div id="tabValidation" class="tab-panel flex flex-col w-full gap-4 pb-12">
+        <div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 shadow-xs flex flex-col gap-4">
+          <div class="flex items-center gap-3 border-b border-outline-variant/20 pb-3">
+            <div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">verified</span>
+            </div>
+            <div>
+              <h2 class="text-[17px] font-bold text-primary">Data Provenance, Caveats &amp; Station Requirements</h2>
+              <p class="text-[12px] text-on-surface-variant">Disclosures for government deployment and research validation</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20 flex flex-col gap-1">
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase">Spatial Resolution Caveat</span>
+              <p class="text-[12px] text-on-surface leading-relaxed">
+                ERA5-Land native grid is ~9 km. Sub-cell temperature detail comes from lapse-rate modeling; rainfall downscaling requires ongoing validation against automated weather station (AWS) networks.
+              </p>
+            </div>
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20 flex flex-col gap-1">
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase">Ground Truth Anchors</span>
+              <p class="text-[12px] text-on-surface leading-relaxed">
+                Village coordinates audited against 11 ground-truth GPS anchors across taluk headquarters, KVK Theni, and TNAU regional research stations.
+              </p>
+            </div>
+            <div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/20 flex flex-col gap-1">
+              <span class="text-[11px] font-bold text-on-surface-variant uppercase">Operational Readiness</span>
+              <p class="text-[12px] text-on-surface leading-relaxed">
+                Engine supports real-time ingestion of IMD Agromet bulletins and produces calibrated panchayat forecasts in &lt;1.8 seconds.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="w-full bg-surface-container-lowest border-t border-surface-container-high py-3 px-6 mt-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-on-surface-variant text-[11px]">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-primary">VaanVizhi (வானவிழி)</span>
+          <span>|</span>
+          <span>Smart India Hackathon 2026 · Problem Statement PS 26074</span>
+          <span>•</span>
+          <span>MoES / IMD &amp; TNAU Data Architecture</span>
+        </div>
+        <div class="flex items-center gap-3 font-mono">
+          <span>Resolution: 0.01° (~1km)</span>
+          <span>Status: Normal</span>
+          <span>© 2026 VaanVizhi</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==================== MODAL: REAL-TIME LOCATION & LIVE WEATHER ==================== -->
+  <div id="liveLocationModal" class="fixed inset-0 bg-slate-950/70 z-[10000] backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-lg w-full rounded-2xl p-6 border border-outline-variant/30 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-emerald-500 text-[24px]">my_location</span>
+          <div>
+            <h3 class="text-[16px] font-bold text-primary">Real-Time Location &amp; Live Weather</h3>
+            <span class="text-[11px] text-on-surface-variant font-mono" id="modalGpsCoords">Detecting GPS telemetry...</span>
+          </div>
+        </div>
+        <button id="closeLiveLocModalBtn" class="text-on-surface-variant hover:text-on-surface cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Real-Time Current Weather Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="liveWeatherMetricsGrid">
+        <div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold">Temperature</span>
+          <div class="flex items-baseline gap-0.5 my-1">
+            <span class="text-[22px] font-bold text-primary font-mono" id="liveLocTemp">--</span>
+            <span class="text-[11px] text-on-surface-variant">°C</span>
+          </div>
+          <span class="text-[10px] text-on-surface-variant" id="liveLocFeels">Feels --°C</span>
+        </div>
+        <div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold">Humidity</span>
+          <div class="flex items-baseline gap-0.5 my-1">
+            <span class="text-[22px] font-bold text-secondary font-mono" id="liveLocRh">--</span>
+            <span class="text-[11px] text-on-surface-variant">%</span>
+          </div>
+          <span class="text-[10px] text-secondary font-medium">Relative RH</span>
+        </div>
+        <div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold">Rainfall</span>
+          <div class="flex items-baseline gap-0.5 my-1">
+            <span class="text-[22px] font-bold text-primary font-mono" id="liveLocRain">--</span>
+            <span class="text-[11px] text-on-surface-variant">mm</span>
+          </div>
+          <span class="text-[10px] text-on-surface-variant">Live Rate</span>
+        </div>
+        <div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold">Wind Speed</span>
+          <div class="flex items-baseline gap-0.5 my-1">
+            <span class="text-[22px] font-bold text-primary font-mono" id="liveLocWind">--</span>
+            <span class="text-[11px] text-on-surface-variant">km/h</span>
+          </div>
+          <span class="text-[10px] text-on-surface-variant" id="liveLocWindDir">--</span>
+        </div>
+      </div>
+
+      <!-- Nearest Pilot Panchayat Connection Banner -->
+      <div class="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded-xl flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] uppercase tracking-wider font-bold text-emerald-400">Nearest Theni Pilot Panchayat</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300" id="liveLocDistanceTag">-- km away</span>
+        </div>
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <h4 class="text-[15px] font-bold text-primary" id="liveLocNearestGpName">Locating...</h4>
+            <p class="text-[11px] text-on-surface-variant" id="liveLocNearestGpBlock">Connecting to Theni Block Grid</p>
+          </div>
+          <button id="btnApplyNearestGp" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[12px] shadow-sm transition-colors cursor-pointer shrink-0">
+            Select &amp; Downscale
+          </button>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-2">
+        <span class="text-[10px] text-on-surface-variant font-mono">Live telemetry powered by Open-Meteo &amp; VaanVizhi ML</span>
+        <div class="flex gap-2">
+          <button id="btnViewOnMapLive" class="px-4 py-2 rounded-xl bg-primary text-white font-bold text-[12px] hover:bg-primary-container transition-colors cursor-pointer">
+            View on GIS Map
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: IMD BULLETIN UPLOAD ==================== -->
+  <div id="imdModal" class="fixed inset-0 bg-slate-950/70 z-[10000] backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-lg w-full rounded-2xl p-6 border border-outline-variant/30 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[22px]">upload_file</span>
+          <h3 class="text-[16px] font-bold text-primary">Ingest Official IMD Agromet Bulletin</h3>
+        </div>
+        <button id="closeImdModalBtn" class="text-on-surface-variant hover:text-on-surface">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <p class="text-[12px] text-on-surface-variant leading-relaxed">
+        Upload or paste standard IMD Block Agromet CSV bulletin. The pipeline will immediately re-run M3 multi-quantile LightGBM downscaling across all Panchayats.
+      </p>
+
+      <textarea id="imdCsvInput" rows="6" placeholder="block_id,date,tmax,tmin,rh,wind,rain
+BODI,2026-10-24,35.2,23.1,68.0,14.5,6.2
+CUMB,2026-10-24,32.0,21.5,82.0,18.0,14.5..." class="w-full p-3 font-mono text-[11px] bg-surface-container-low rounded-xl border border-outline-variant/30 focus:outline-none text-on-surface"></textarea>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button id="btnCancelImdUpload" class="px-4 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low font-medium text-[12px]">Cancel</button>
+        <button id="btnSubmitImdUpload" class="px-4 py-2 rounded-xl bg-primary text-white font-bold text-[12px] hover:bg-primary-container">Ingest Bulletin &amp; Downscale</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: SEND ADVISORY DISPATCH ==================== -->
+  <div id="sendMessageModal" class="fixed inset-0 bg-slate-950/75 z-[10000] backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-xl w-full rounded-2xl p-6 border border-outline-variant/30 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[22px]">send</span>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-bold text-primary">Dispatch Hyperlocal Agro-Advisory</h3>
+            <p class="text-[11px] text-on-surface-variant font-mono">TRAI DLT Header: VK-AGROTN | Template: 140716123456</p>
+          </div>
+        </div>
+        <button id="closeSendMessageModalBtn" class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Target Panchayat & Crop Badge -->
+      <div class="flex items-center justify-between bg-surface-container-low p-3 rounded-xl border border-outline-variant/20">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+          <div>
+            <div class="text-[12px] font-bold text-primary" id="modalTargetPanchayatName">Theni District</div>
+            <div class="text-[10px] text-on-surface-variant font-mono" id="modalTargetCropName">Crop: Banana (Vegetative)</div>
+          </div>
+        </div>
+        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] border border-emerald-500/20 flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Gateway Ready
+        </span>
+      </div>
+
+      <!-- Channel Selector Tabs -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Transmission Channel</label>
+        <div class="grid grid-cols-2 gap-2 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30">
+          <button type="button" id="modalChannelWa" class="channel-tab-btn active flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-[12px] font-bold bg-emerald-600 text-white shadow-xs transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[17px]">chat</span>
+            <span>WhatsApp Alert</span>
+          </button>
+          <button type="button" id="modalChannelSms" class="channel-tab-btn flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-[12px] font-medium text-on-surface-variant hover:text-on-surface transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[17px]">sms</span>
+            <span>DLT Tamil SMS</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Target Recipient Type -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Recipient Targeting</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/30 bg-surface-container-low cursor-pointer hover:border-primary/50 transition-colors">
+            <input type="radio" name="modalRecipientType" value="broadcast" checked class="text-primary focus:ring-0">
+            <div class="flex flex-col">
+              <span class="text-[12px] font-bold text-primary">All Registered Farmers</span>
+              <span class="text-[10px] text-on-surface-variant font-mono">1,240 verified farmers in GP</span>
+            </div>
+          </label>
+          <label class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/30 bg-surface-container-low cursor-pointer hover:border-primary/50 transition-colors">
+            <input type="radio" name="modalRecipientType" value="direct" class="text-primary focus:ring-0">
+            <div class="flex flex-col">
+              <span class="text-[12px] font-bold text-primary">Direct Mobile Number</span>
+              <span class="text-[10px] text-on-surface-variant font-mono">Single farmer / test SIM</span>
+            </div>
+          </label>
+        </div>
+
+        <div id="modalDirectPhoneContainer" class="hidden mt-2">
+          <div class="flex items-center gap-2 bg-surface-container-low rounded-xl border border-outline-variant/30 px-3 py-2">
+            <span class="text-[12px] font-bold text-on-surface-variant font-mono">+91</span>
+            <input type="tel" id="modalDirectPhoneInput" placeholder="9876543210 (10-digit mobile number)" maxlength="10" class="w-full bg-transparent text-[13px] text-on-surface font-mono focus:outline-none placeholder:text-on-surface-variant/50">
+          </div>
+          <p class="text-[10px] text-on-surface-variant mt-1">Direct dispatch: Opens WhatsApp conversation or delivers test SMS instantly to this number.</p>
+        </div>
+      </div>
+
+      <!-- Advisory Message Content -->
+      <div class="flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider" for="modalMessageText">Message Payload (Tamil / DLT Approved)</label>
+          <button type="button" id="modalResetMessageBtn" class="text-[10px] text-primary hover:underline font-bold cursor-pointer">Reset to Default</button>
+        </div>
+        <textarea id="modalMessageText" rows="4" class="w-full p-3 font-sans text-[12px] bg-surface-container-low rounded-xl border border-outline-variant/30 focus:outline-none text-on-surface leading-relaxed resize-none"></textarea>
+        <div class="flex items-center justify-between text-[10px] font-mono text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/20">
+          <span id="modalCharCounter">0 characters</span>
+          <span id="modalSegmentCounter" class="text-emerald-500 font-bold">1 Segment (&le;70 chars)</span>
+        </div>
+      </div>
+
+      <!-- Live Broadcast Dispatch Status / Feedback -->
+      <div id="modalDispatchStatusBox" class="hidden p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-[12px] flex flex-col gap-2">
+        <div class="flex items-center justify-between font-bold">
+          <span class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px] animate-spin text-emerald-500" id="modalStatusSpinner">sync</span>
+            <span id="modalStatusTitle">Transmitting to DLT SMS Gateway...</span>
+          </span>
+          <span class="font-mono text-[11px]" id="modalStatusPercent">0%</span>
+        </div>
+        <div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+          <div id="modalProgressBar" class="bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <div class="text-[11px] font-mono text-on-surface-variant" id="modalStatusDetails">
+          Preparing payload packets...
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 gap-2 flex-wrap">
+        <button type="button" id="modalCopyTextBtn" class="px-3.5 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low font-bold text-[12px] border border-outline-variant/30 flex items-center gap-1.5 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">content_copy</span>
+          <span id="modalCopyTextBtnLabel">Copy Text</span>
+        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" id="modalCancelBtn" class="px-4 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low font-medium text-[12px] cursor-pointer">Cancel</button>
+          <button type="button" id="modalNativeSmsBtn" class="hidden px-3.5 py-2 rounded-xl bg-sky-700 hover:bg-sky-600 text-white font-bold text-[12px] shadow-sm flex items-center gap-1.5 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[17px]">stay_current_portrait</span>
+            <span>Open in Phone SMS App</span>
+          </button>
+          <button type="button" id="modalSendActionBtn" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[12px] shadow-sm flex items-center gap-1.5 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[17px]" id="modalSendBtnIcon">chat</span>
+            <span id="modalSendBtnLabel">Send via WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: MODEL RUN & ARCHITECTURE DIAGNOSTICS ==================== -->
+  <div id="modelRunModal" class="fixed inset-0 bg-slate-950/75 z-[10000] backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-xl w-full rounded-2xl p-6 border border-outline-variant/30 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-primary-container text-white flex items-center justify-center">
+            <span class="material-symbols-outlined text-[22px]">memory</span>
+          </div>
+          <div>
+            <h3 class="text-[16px] font-bold text-primary">Model Run #4: LightGBM + Topo Residuals</h3>
+            <p class="text-[11px] text-on-surface-variant font-mono">Multi-Quantile Pinball Loss Regressor (v2.4-TNAU)</p>
+          </div>
+        </div>
+        <button id="closeModelRunModalBtn" class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-3 gap-2.5">
+        <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Validation R²</span>
+          <span class="text-[20px] font-extrabold text-secondary">0.89</span>
+          <span class="text-[10px] text-on-surface-variant font-mono">14 AWS Ground Truth</span>
+        </div>
+        <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Temp RMSE</span>
+          <span class="text-[20px] font-extrabold text-primary">1.4°C</span>
+          <span class="text-[10px] text-on-surface-variant font-mono">vs 3.2°C Coarse NWP</span>
+        </div>
+        <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col">
+          <span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">PoP ROC AUC</span>
+          <span class="text-[20px] font-extrabold text-emerald-500">0.92</span>
+          <span class="text-[10px] text-on-surface-variant font-mono">Convective Rain Accuracy</span>
+        </div>
+      </div>
+
+      <!-- SHAP Drivers Table -->
+      <div class="flex flex-col gap-1.5">
+        <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">SHAP Feature Importance (Orographic Downscaling)</span>
+        <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/20 flex flex-col gap-2">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-semibold text-primary mb-1">
+              <span>Elevation Anomaly (SRTM 30m Lapse-Rate)</span>
+              <span class="font-mono text-secondary font-bold">42%</span>
+            </div>
+            <div class="w-full bg-surface-container-high rounded-full h-1.5">
+              <div class="bg-secondary h-1.5 rounded-full" style="width: 42%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-semibold text-primary mb-1">
+              <span>Orographic Slope &amp; Aspect (Palani Foothills)</span>
+              <span class="font-mono text-primary font-bold">26%</span>
+            </div>
+            <div class="w-full bg-surface-container-high rounded-full h-1.5">
+              <div class="bg-primary h-1.5 rounded-full" style="width: 26%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-semibold text-primary mb-1">
+              <span>Western Ghats Ridge Funneling Distance</span>
+              <span class="font-mono text-amber-500 font-bold">18%</span>
+            </div>
+            <div class="w-full bg-surface-container-high rounded-full h-1.5">
+              <div class="bg-amber-500 h-1.5 rounded-full" style="width: 18%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-semibold text-primary mb-1">
+              <span>Kudaganar / Vaigai Hydrological Buffer</span>
+              <span class="font-mono text-sky-500 font-bold">8%</span>
+            </div>
+            <div class="w-full bg-surface-container-high rounded-full h-1.5">
+              <div class="bg-sky-500 h-1.5 rounded-full" style="width: 8%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-semibold text-primary mb-1">
+              <span>Sentinel-2 NDVI 16-Day Canopy Composite</span>
+              <span class="font-mono text-emerald-500 font-bold">6%</span>
+            </div>
+            <div class="w-full bg-surface-container-high rounded-full h-1.5">
+              <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 6%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Navigation Buttons -->
+      <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 gap-2 flex-wrap">
+        <button type="button" id="btnModalGoToDisagg" class="px-3.5 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low font-bold text-[12px] border border-outline-variant/30 flex items-center gap-1.5 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">layers</span>
+          <span>Spatial Theory</span>
+        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" id="btnModalCloseModelRun" class="px-4 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low font-medium text-[12px] cursor-pointer">Close</button>
+          <button type="button" id="btnModalGoToInsights" class="px-4 py-2 rounded-xl bg-primary text-white font-bold text-[12px] hover:bg-primary-container shadow-xs flex items-center gap-1.5 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">psychology</span>
+            <span>View Full ML Insights</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=12"></script>
+</body>
+</html>

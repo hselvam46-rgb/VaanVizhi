@@ -1,0 +1,35 @@
+- id: paddy_blast_alert
+  crop: paddy
+  stages: [nursery_tillering, panicle_flowering]
+  when:
+    all:
+      - {var: rh, op: ">=", value: 85.0}
+      - {var: tmin, op: "<=", value: 23.0}
+      - {var: tmin, op: ">=", value: 18.0}
+  severity: amber
+  advice_en: "Cool night temperatures and morning dew favor Leaf Blast. Avoid excessive nitrogen application and monitor leaf lesions."
+  advice_ta: "குளிர்ந்த இரவு மற்றும் பனியால் குலைநோய் பரவக்கூடும். தழைச்சத்து உரங்களை குறைத்து இலைகளை கண்காணிக்கவும்."
+  source: "TNAU Agritech Portal: Rice Blast Forecasting Model (Pyricularia oryzae)"
+
+- id: paddy_flowering_rain_stagnation
+  crop: paddy
+  stages: [panicle_flowering]
+  when:
+    all:
+      - {var: rain_amount, op: ">=", value: 20.0}
+  severity: amber
+  advice_en: "Rain during anthesis hampers pollination. Drain excess surface water to maintain a shallow 2.5 cm depth."
+  advice_ta: "பூக்கும் தருணத்தில் அதிக மழை மகரந்தச் சேர்க்கையை பாதிக்கும். வயலில் அதிகப்படியான நீரை உடனே வடிக்கவும்."
+  source: "ICAR-Indian Institute of Rice Research (IIRR) Agromet Protocol"
+
+- id: paddy_harvest_dry_window
+  crop: paddy
+  stages: [grain_filling_harvest]
+  when:
+    all:
+      - {var: prob_rain, op: "<=", value: 0.15}
+      - {var: tmax, op: ">=", value: 31.0}
+  severity: green
+  advice_en: "Favorable dry weather expected over next 72 hours. Ideal window for combine harvesting and sun-drying grains."
+  advice_ta: "அடுத்த 72 மணி நேரத்திற்கு வறண்ட வானிலை நிலவும். அறுவடை செய்யவும் தானியங்களை உலர்த்தவும் உகந்த தருணம்."
+  source: "TNAU GKMS Agromet Advisory Bulletin (Theni KVK)"

@@ -1,0 +1,34 @@
+- id: grapes_downy_mildew_alert
+  crop: grapes
+  stages: [pruning_budbreak, flowering_berry_set]
+  when:
+    all:
+      - {var: rh, op: ">=", value: 80.0}
+      - {var: tmin, op: ">=", value: 20.0}
+      - {var: prob_rain, op: ">=", value: 0.40}
+  severity: red
+  advice_en: "High humidity and warm nights favor Downy Mildew. Spray 1% Bordeaux mixture or Copper Oxychloride immediately after rain stops."
+  advice_ta: "அதிக ஈரப்பதம் நிலவுவதால் அடிச்சாம்பல் நோய் பரவ வாய்ப்பு. 1% போர்டோ கலவை தெளிக்கவும்."
+  source: "TNAU Grapes Advisory: Plasmopara viticola Management in Cumbum Valley (GKMS Theni Bulletin No. 44)"
+
+- id: grapes_berry_crack_rain
+  crop: grapes
+  stages: [ripening_harvest]
+  when:
+    all:
+      - {var: rain_amount, op: ">=", value: 15.0}
+  severity: red
+  advice_en: "Excess moisture at harvest causes berry cracking and sour rot. Hasten harvest of mature bunches and maintain drainage."
+  advice_ta: "அறுவடை தருணத்தில் மழை பழ வெடிப்பை உண்டாக்கும். முதிர்ந்த குலைகளை விரைந்து அறுவடை செய்க."
+  source: "NRCG (National Research Centre for Grapes) Harvest Quality Advisory 2022"
+
+- id: grapes_heat_sunburn
+  crop: grapes
+  stages: [flowering_berry_set]
+  when:
+    all:
+      - {var: tmax, op: ">=", value: 37.0}
+  severity: amber
+  advice_en: "Intense heat causes berry sunburn. Ensure adequate canopy shading over bunches and drip irrigate in the early morning."
+  advice_ta: "கடும் வெயிலால் பழங்களில் வெயில் காயம் ஏற்படும். கொடிகளால் நிழல் அமைத்து காலையில் நீர் பாய்ச்சவும்."
+  source: "TNAU Department of Fruit Science: Viticulture in Tropics Guideline"

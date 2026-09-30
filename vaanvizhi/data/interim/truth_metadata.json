@@ -1,0 +1,13 @@
+{
+  "start_date": "2015-01-01",
+  "end_date": "2025-08-31",
+  "train_window": "2015-01-01 to 2022-12-31",
+  "val_window": "2023-01-01 to 2023-12-31",
+  "test_window": "2024-01-01 to 2025-08-31",
+  "total_panchayats": 130,
+  "independent_grid_cells_approx": 38,
+  "caveat": "ERA5-Land spatial resolution is ~9 km. Panchayats within the same grid cell share reanalysis truth. Sub-cell temperature gradients arise from adiabatic lapse-rate (-6.5\u00b0C/km); sub-cell rain skill requires AWS station verification.",
+  "data_source": "SYNTHETIC DEMO (OFFLINE)",
+  "is_synthetic": true,
+  "disclaimer": "SYNTHETIC DEMO - NOT VALIDATED ON GROUND TRUTH. METRICS DO NOT REPRESENT OPERATIONAL SKILL."
+}

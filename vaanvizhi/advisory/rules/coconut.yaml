@@ -1,0 +1,22 @@
+- id: coconut_heat_button_shedding
+  crop: coconut
+  stages: [perennial]
+  when:
+    all:
+      - {var: tmax, op: ">=", value: 37.0}
+  severity: amber
+  advice_en: "Extreme daytime heat induces button shedding. Irrigate 80-100 liters per palm every other day or adopt basin mulching."
+  advice_ta: "கடும் வெயிலால் குரும்பை உதிரக்கூடும். மரம் ஒன்றுக்கு ஒரு நாள் விட்டு ஒரு நாள் 100 லிட்டர் நீர் பாய்ச்சவும்."
+  source: "TNAU Coconut Advisory (Theni District KVK Bulletin No. 31)"
+
+- id: coconut_rhizoctonia_monsoon
+  crop: coconut
+  stages: [perennial]
+  when:
+    all:
+      - {var: rain_amount, op: ">=", value: 25.0}
+      - {var: rh, op: ">=", value: 85.0}
+  severity: amber
+  advice_en: "Prolonged high rainfall predisposes crowns to bud rot. Apply 1% Bordeaux paste or Copper Oxychloride to the crown center."
+  advice_ta: "தொடர் மழையால் குருத்து அழுகல் நோய் பரவக்கூடும். தென்னை மரத்தின் குருத்து பகுதியில் போர்டோ பசையை தடவவும்."
+  source: "ICAR-CPCRI (Central Plantation Crops Research Institute) Disease Management"

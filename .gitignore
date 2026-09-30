@@ -1,0 +1,22 @@
+# Python Bytecode and Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Large Training Datasets (Not needed for runtime inference, models are pre-compiled)
+vaanvizhi/data/features/training_dataset.csv.gz
+vaanvizhi/data/interim/truth_timeseries.csv.gz
+
+# Local Logs & IDE files
+*.log
+.vscode/
+.idea/
+.DS_Store
+*.tmp

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" fill="none">
+  <!-- Radar Eye Icon -->
+  <g transform="translate(4, 4)">
+    <circle cx="28" cy="28" r="26" fill="#0f3b60" fill-opacity="0.06" stroke="#0f3b60" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <circle cx="28" cy="28" r="18" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.4"/>
+    <circle cx="28" cy="28" r="10" stroke="#059669" stroke-width="1.5" stroke-opacity="0.6"/>
+    <!-- Radar Sweep & Satellite Ray -->
+    <path d="M28 28 L48 16 A26 26 0 0 0 28 2 Z" fill="url(#radarGradient)" fill-opacity="0.35"/>
+    <!-- Eye Shape Contour -->
+    <path d="M12 28 C18 18 38 18 44 28 C38 38 18 38 12 28 Z" stroke="#0f3b60" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+    <!-- Iris & Weather Pupil / Droplet -->
+    <circle cx="28" cy="28" r="5.5" fill="#0f3b60"/>
+    <circle cx="30" cy="26" r="1.5" fill="#38bdf8"/>
+    <!-- Geo Grid Ticks -->
+    <path d="M28 2 L28 8 M28 48 L28 54 M2 28 L8 28 M48 28 L54 28" stroke="#0f3b60" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <!-- Typography -->
+  <text x="68" y="32" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-weight="800" font-size="22" fill="#0f172a" letter-spacing="-0.5">VaanVizhi</text>
+  <text x="178" y="27" font-family="'Mukta Malar', 'Noto Sans Tamil', sans-serif" font-weight="600" font-size="13" fill="#0284c7">வானவிழி</text>
+  <text x="68" y="47" font-family="'Inter', sans-serif" font-weight="500" font-size="10.5" fill="#64748b" letter-spacing="0.2">Panchayat Weather Intelligence &amp; Agro-Advisory</text>
+  <!-- Gov / SIH Tag -->
+  <rect x="68" y="52" width="62" height="10" rx="3" fill="#ecfdf5"/>
+  <text x="71" y="60" font-family="'Inter', sans-serif" font-weight="600" font-size="7.5" fill="#059669" letter-spacing="0.4">SIH PS 26074</text>
+  <defs>
+    <linearGradient id="radarGradient" x1="28" y1="28" x2="48" y2="16" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0284c7" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>

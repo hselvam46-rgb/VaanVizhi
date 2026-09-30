@@ -1,0 +1,71 @@
+# VaanVizhi - Crop Calendar for Theni District
+# Sources: TNAU Agritech Portal (Horticulture & Agriculture), ICAR-KVK Theni bulletins.
+
+banana:
+  crop_name_en: "Banana (Grand Naine / Ney Poovan)"
+  crop_name_ta: "வாழை (கிராண்ட் நைன் / நெய் பூவன்)"
+  signature_regions: ["Cumbum", "Uthamapalayam", "Theni", "Chinnamanur"]
+  stages:
+    vegetative:
+      days: [1, 150]
+      desc: "Vegetative growth and leaf emergence"
+    shooting_flowering:
+      days: [151, 240]
+      desc: "Bunch emergence, flowering and propping"
+    fruiting_maturity:
+      days: [241, 330]
+      desc: "Bunch development, filling and harvest"
+
+grapes:
+  crop_name_en: "Cumbum Grapes (Paneer Thratchai - GI Tagged)"
+  crop_name_ta: "கம்பம் பன்னீர் திராட்சை (புவிசார் குறியீடு)"
+  signature_regions: ["Cumbum", "Chinnamanur", "Uthamapalayam"]
+  stages:
+    pruning_budbreak:
+      days: [1, 25]
+      desc: "Post-pruning and bud burst"
+    flowering_berry_set:
+      days: [26, 60]
+      desc: "Flowering and berry development"
+    ripening_harvest:
+      days: [61, 110]
+      desc: "Berry softening, sugar accumulation, harvest"
+
+paddy:
+  crop_name_en: "Paddy (Kuruvai / Samba)"
+  crop_name_ta: "நெல் (குறுவை / சம்பா)"
+  signature_regions: ["Theni", "Periyakulam", "Chinnamanur", "Andipatti"]
+  stages:
+    nursery_tillering:
+      days: [1, 45]
+      desc: "Seedling nursery and active tillering"
+    panicle_flowering:
+      days: [46, 85]
+      desc: "Panicle initiation and flowering"
+    grain_filling_harvest:
+      days: [86, 125]
+      desc: "Milky, dough and maturity stage"
+
+cotton:
+  crop_name_en: "Cotton"
+  crop_name_ta: "பருத்தி"
+  signature_regions: ["Andipatti", "Bodinayakanur", "Theni"]
+  stages:
+    seedling:
+      days: [1, 30]
+      desc: "Germination and seedling establishment"
+    squaring_flowering:
+      days: [31, 80]
+      desc: "Square formation and flowering"
+    boll_development:
+      days: [81, 150]
+      desc: "Boll opening and picking"
+
+coconut:
+  crop_name_en: "Coconut"
+  crop_name_ta: "தென்னை"
+  signature_regions: ["Periyakulam", "Theni", "Uthamapalayam", "Andipatti"]
+  stages:
+    perennial:
+      days: [1, 365]
+      desc: "Continuous flowering and nut development"

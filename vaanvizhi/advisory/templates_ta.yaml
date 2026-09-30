@@ -1,0 +1,46 @@
+# VaanVizhi - Tamil Agromet SMS & WhatsApp Templates
+# Note: Indian Telecom DLT Standard enforces ~70 characters per single Unicode SMS segment.
+# Multi-segment messages cost extra and risk concatenation truncation on basic feature phones.
+
+sms_header: "வானிலை எச்சரிக்கை (தேனி): "
+
+templates:
+  banana_spray_rain_delay:
+    sms: "கனமழை வாய்ப்பு. வாழைக்கு மருந்து தெளிப்பதை ஒத்திவைத்து, வடிகால் வாய்க்காலை தூர்வாரவும்."
+    dlt_template_id: "DLT_TN_AGRI_BANANA_01"
+  banana_high_wind_propping:
+    sms: "பலத்த காற்று வீசக்கூடும். வாழைக்கு மூங்கில் முட்டு கொடுத்து சாய்வதைத் தடுக்கவும்."
+    dlt_template_id: "DLT_TN_AGRI_BANANA_02"
+  banana_heat_flowering_stress:
+    sms: "கடும் வெப்பம். வாழைக்கு மாலையில் நீர் பாய்ச்சி, தரைப்பகுதியில் சருகுகளால் மூடாக்கு இடவும்."
+    dlt_template_id: "DLT_TN_AGRI_BANANA_03"
+  grapes_downy_mildew_alert:
+    sms: "அதிக ஈரப்பதம் நிலவுவதால் திராட்சையில் அடிச்சாம்பல் நோய் பரவ வாய்ப்பு. போர்டோ கலவை தெளிக்கவும்."
+    dlt_template_id: "DLT_TN_AGRI_GRAPES_01"
+  grapes_berry_crack_rain:
+    sms: "மழை பழ வெடிப்பை உண்டாக்கும். முதிர்ந்த திராட்சைக் குலைகளை விரைந்து அறுவடை செய்க."
+    dlt_template_id: "DLT_TN_AGRI_GRAPES_02"
+  grapes_heat_sunburn:
+    sms: "கடும் வெயிலால் பழங்களில் வெயில் காயம் ஏற்படும். கொடிகளால் நிழல் அமைத்து நீர் பாய்ச்சவும்."
+    dlt_template_id: "DLT_TN_AGRI_GRAPES_03"
+  paddy_blast_alert:
+    sms: "குளிர்ந்த இரவு மற்றும் பனியால் நெல்லில் குலைநோய் பரவக்கூடும். தழைச்சத்து உரங்களை குறைக்கவும்."
+    dlt_template_id: "DLT_TN_AGRI_PADDY_01"
+  paddy_flowering_rain_stagnation:
+    sms: "பூக்கும் தருணத்தில் அதிக மழை மகரந்தச் சேர்க்கையை பாதிக்கும். வயல் நீரை உடனே வடிக்கவும்."
+    dlt_template_id: "DLT_TN_AGRI_PADDY_02"
+  paddy_harvest_dry_window:
+    sms: "அடுத்த 72 மணி நேரம் வறண்ட வானிலை நிலவும். நெல் அறுவடை செய்யவும் உலர்த்தவும் உகந்த தருணம்."
+    dlt_template_id: "DLT_TN_AGRI_PADDY_03"
+  cotton_sowing_dry_spell:
+    sms: "வறண்ட சூழல் நிலவுகிறது. பருவமழை பெய்யும் வரை மானாவாரி பருத்தி விதைப்பை ஒத்திவைக்கவும்."
+    dlt_template_id: "DLT_TN_AGRI_COTTON_01"
+  cotton_bollworm_humidity:
+    sms: "காற்றில் அதிக ஈரப்பதம் உள்ளதால் காய் புழுக்கள் தாக்க வாய்ப்பு. ஏக்கருக்கு 5 இனக்கவர்ச்சி பொறி வைக்கவும்."
+    dlt_template_id: "DLT_TN_AGRI_COTTON_02"
+  coconut_heat_button_shedding:
+    sms: "கடும் வெயிலால் குரும்பை உதிரக்கூடும். மரம் ஒன்றுக்கு ஒரு நாள் விட்டு ஒரு நாள் நீர் பாய்ச்சவும்."
+    dlt_template_id: "DLT_TN_AGRI_COCONUT_01"
+  coconut_rhizoctonia_monsoon:
+    sms: "தொடர் மழையால் குருத்து அழுகல் நோய் பரவக்கூடும். தென்னை குருத்தில் போர்டோ பசையை தடவவும்."
+    dlt_template_id: "DLT_TN_AGRI_COCONUT_02"

@@ -1,0 +1,131 @@
+gp_id,gp_name,block_name,block_id,lgd_code,district,state,lat,lon,verified,verified_status
+GP_001,Ammachiapuram,Andipatti,ANDI,583401,Theni,Tamil Nadu,10.08,77.66698,0,UNVERIFIED_DRAFT
+GP_002,Anuppapatti,Andipatti,ANDI,583402,Theni,Tamil Nadu,10.03586,77.66263,0,UNVERIFIED_DRAFT
+GP_003,Bodithasanpatti,Andipatti,ANDI,583403,Theni,Tamil Nadu,10.0243,77.63382,0,UNVERIFIED_DRAFT
+GP_004,Ethakoil,Andipatti,ANDI,583404,Theni,Tamil Nadu,9.95684,77.66621,0,UNVERIFIED_DRAFT
+GP_005,G.Usilampatti,Andipatti,ANDI,583405,Theni,Tamil Nadu,9.96101,77.63288,0,UNVERIFIED_DRAFT
+GP_006,Kadirnarasingapuram,Andipatti,ANDI,583406,Theni,Tamil Nadu,9.90418,77.6709,0,UNVERIFIED_DRAFT
+GP_007,Kanniservaipatty,Andipatti,ANDI,583407,Theni,Tamil Nadu,10.0188,77.62438,0,UNVERIFIED_DRAFT
+GP_008,Kothaluthu,Andipatti,ANDI,583408,Theni,Tamil Nadu,10.00349,77.61844,0,UNVERIFIED_DRAFT
+GP_009,Kothapatti,Andipatti,ANDI,583409,Theni,Tamil Nadu,9.953,77.67843,0,UNVERIFIED_DRAFT
+GP_010,Kovilpatti,Andipatti,ANDI,583410,Theni,Tamil Nadu,10.00359,77.71426,0,UNVERIFIED_DRAFT
+GP_011,Kunnur,Andipatti,ANDI,583411,Theni,Tamil Nadu,10.022,77.641,1,VERIFIED
+GP_012,Marikkundu,Andipatti,ANDI,583412,Theni,Tamil Nadu,10.08,77.66892,0,UNVERIFIED_DRAFT
+GP_013,Mottanuthu,Andipatti,ANDI,583413,Theni,Tamil Nadu,10.00862,77.70428,0,UNVERIFIED_DRAFT
+GP_014,Okkaraipatti,Andipatti,ANDI,583414,Theni,Tamil Nadu,9.91823,77.60443,0,UNVERIFIED_DRAFT
+GP_015,Palacombai,Andipatti,ANDI,583415,Theni,Tamil Nadu,9.98893,77.65867,0,UNVERIFIED_DRAFT
+GP_016,Palayakottai,Andipatti,ANDI,583416,Theni,Tamil Nadu,10.00251,77.65146,0,UNVERIFIED_DRAFT
+GP_017,Pitchampatti,Andipatti,ANDI,583417,Theni,Tamil Nadu,10.03135,77.64755,0,UNVERIFIED_DRAFT
+GP_018,Pullimankombai,Andipatti,ANDI,583418,Theni,Tamil Nadu,10.00162,77.62822,0,UNVERIFIED_DRAFT
+GP_019,Rajadhani,Andipatti,ANDI,583419,Theni,Tamil Nadu,9.983,77.671,1,VERIFIED
+GP_020,Rajagopalanpatti,Andipatti,ANDI,583420,Theni,Tamil Nadu,10.02014,77.68087,0,UNVERIFIED_DRAFT
+GP_021,Rajakkalpatti,Andipatti,ANDI,583421,Theni,Tamil Nadu,10.02375,77.65654,0,UNVERIFIED_DRAFT
+GP_022,Ramakrishnapuram,Andipatti,ANDI,583422,Theni,Tamil Nadu,9.97263,77.61861,0,UNVERIFIED_DRAFT
+GP_023,Rengasamudram,Andipatti,ANDI,583423,Theni,Tamil Nadu,9.95255,77.66197,0,UNVERIFIED_DRAFT
+GP_024,Shanmugasundarapuram,Andipatti,ANDI,583424,Theni,Tamil Nadu,9.98975,77.71156,0,UNVERIFIED_DRAFT
+GP_025,Sitharpatti,Andipatti,ANDI,583425,Theni,Tamil Nadu,10.00572,77.71488,0,UNVERIFIED_DRAFT
+GP_026,T.Subbulapuram,Andipatti,ANDI,583426,Theni,Tamil Nadu,9.9503,77.65189,0,UNVERIFIED_DRAFT
+GP_027,Thekkampatti,Andipatti,ANDI,583427,Theni,Tamil Nadu,9.94385,77.64501,0,UNVERIFIED_DRAFT
+GP_028,Theppampatti,Andipatti,ANDI,583428,Theni,Tamil Nadu,10.04117,77.63952,0,UNVERIFIED_DRAFT
+GP_029,Thimmarasanayakanur,Andipatti,ANDI,583429,Theni,Tamil Nadu,9.99358,77.66774,0,UNVERIFIED_DRAFT
+GP_030,Thirumalapuram,Andipatti,ANDI,583430,Theni,Tamil Nadu,10.08,77.62364,0,UNVERIFIED_DRAFT
+GP_031,Ahamalai,Bodinayakanur,BODI,583131,Theni,Tamil Nadu,9.97334,77.4202,0,UNVERIFIED_DRAFT
+GP_032,Ammapatti,Bodinayakanur,BODI,583132,Theni,Tamil Nadu,9.96398,77.37637,0,UNVERIFIED_DRAFT
+GP_033,Annaikaraipatty,Bodinayakanur,BODI,583133,Theni,Tamil Nadu,10.03237,77.42794,0,UNVERIFIED_DRAFT
+GP_034,Dombuchery,Bodinayakanur,BODI,583134,Theni,Tamil Nadu,10.021,77.402,1,VERIFIED
+GP_035,Kamarajapuram,Bodinayakanur,BODI,583135,Theni,Tamil Nadu,9.99806,77.36306,0,UNVERIFIED_DRAFT
+GP_036,Kodangipatty,Bodinayakanur,BODI,583136,Theni,Tamil Nadu,10.04565,77.39123,0,UNVERIFIED_DRAFT
+GP_037,Koolayanur,Bodinayakanur,BODI,583137,Theni,Tamil Nadu,9.96977,77.32904,0,UNVERIFIED_DRAFT
+GP_038,Kottakudi,Bodinayakanur,BODI,583138,Theni,Tamil Nadu,10.0136,77.4229,0,UNVERIFIED_DRAFT
+GP_039,Maniyampatty,Bodinayakanur,BODI,583139,Theni,Tamil Nadu,10.02342,77.32935,0,UNVERIFIED_DRAFT
+GP_040,Manjinayakanpatty,Bodinayakanur,BODI,583140,Theni,Tamil Nadu,9.95277,77.40689,0,UNVERIFIED_DRAFT
+GP_041,Nagalapuram,Bodinayakanur,BODI,583141,Theni,Tamil Nadu,10.05827,77.28006,0,UNVERIFIED_DRAFT
+GP_042,Rasingapuram,Bodinayakanur,BODI,583142,Theni,Tamil Nadu,10.05967,77.39673,0,UNVERIFIED_DRAFT
+GP_043,Silamalai,Bodinayakanur,BODI,583143,Theni,Tamil Nadu,9.9712,77.3458,1,VERIFIED
+GP_044,Sillamarathupatty,Bodinayakanur,BODI,583144,Theni,Tamil Nadu,9.96789,77.40025,0,UNVERIFIED_DRAFT
+GP_045,Uppukottai,Bodinayakanur,BODI,583145,Theni,Tamil Nadu,9.94896,77.33771,0,UNVERIFIED_DRAFT
+GP_046,Alagapuri,Chinnamanur,CHIN,583646,Theni,Tamil Nadu,9.83931,77.39957,0,UNVERIFIED_DRAFT
+GP_047,Ayyampatti,Chinnamanur,CHIN,583647,Theni,Tamil Nadu,9.85874,77.39164,0,UNVERIFIED_DRAFT
+GP_048,Chinnaovalapuram,Chinnamanur,CHIN,583648,Theni,Tamil Nadu,9.81507,77.43126,0,UNVERIFIED_DRAFT
+GP_049,Erasakkanayakanur,Chinnamanur,CHIN,583649,Theni,Tamil Nadu,9.8251,77.42722,0,UNVERIFIED_DRAFT
+GP_050,Erranampatty,Chinnamanur,CHIN,583650,Theni,Tamil Nadu,9.86832,77.36885,0,UNVERIFIED_DRAFT
+GP_051,Kamtchipuram,Chinnamanur,CHIN,583601,Theni,Tamil Nadu,9.86746,77.35785,0,UNVERIFIED_DRAFT
+GP_052,Kanniservaipatty,Chinnamanur,CHIN,583602,Theni,Tamil Nadu,9.83131,77.41585,0,UNVERIFIED_DRAFT
+GP_053,Muthulapuram,Chinnamanur,CHIN,583603,Theni,Tamil Nadu,9.79,77.35899,0,UNVERIFIED_DRAFT
+GP_054,Pottipuram,Chinnamanur,CHIN,583604,Theni,Tamil Nadu,9.87023,77.34831,0,UNVERIFIED_DRAFT
+GP_055,Pulananthapuram,Chinnamanur,CHIN,583605,Theni,Tamil Nadu,9.90124,77.35153,0,UNVERIFIED_DRAFT
+GP_056,Pulikkuthi,Chinnamanur,CHIN,583606,Theni,Tamil Nadu,9.79651,77.34511,0,UNVERIFIED_DRAFT
+GP_057,Sankarapuram,Chinnamanur,CHIN,583607,Theni,Tamil Nadu,9.84645,77.37267,0,UNVERIFIED_DRAFT
+GP_058,Seepalakottai,Chinnamanur,CHIN,583608,Theni,Tamil Nadu,9.818,77.38831,0,UNVERIFIED_DRAFT
+GP_059,Veppampatty,Chinnamanur,CHIN,583609,Theni,Tamil Nadu,9.81684,77.39261,0,UNVERIFIED_DRAFT
+GP_060,Aangurpalayam,Cumbum,CUMB,583510,Theni,Tamil Nadu,9.73065,77.3106,0,UNVERIFIED_DRAFT
+GP_061,Karunakamuthanpatty,Cumbum,CUMB,583511,Theni,Tamil Nadu,9.72542,77.28681,0,UNVERIFIED_DRAFT
+GP_062,Kullappagoundanpatty,Cumbum,CUMB,583512,Theni,Tamil Nadu,9.74359,77.29893,0,UNVERIFIED_DRAFT
+GP_063,Narayanthevanpatty,Cumbum,CUMB,583513,Theni,Tamil Nadu,9.71043,77.33963,0,UNVERIFIED_DRAFT
+GP_064,Surulipatty,Cumbum,CUMB,583514,Theni,Tamil Nadu,9.7035,77.3002,1,VERIFIED
+GP_065,Athangaraipatty,K. Myladumparai,KMYL,583815,Theni,Tamil Nadu,9.8207,77.56115,0,UNVERIFIED_DRAFT
+GP_066,Duraichamipuram,K. Myladumparai,KMYL,583816,Theni,Tamil Nadu,9.83866,77.52753,0,UNVERIFIED_DRAFT
+GP_067,Ettaparajapuram,K. Myladumparai,KMYL,583817,Theni,Tamil Nadu,9.72557,77.58561,0,UNVERIFIED_DRAFT
+GP_068,Gandamanur,K. Myladumparai,KMYL,583818,Theni,Tamil Nadu,9.7939,77.58249,0,UNVERIFIED_DRAFT
+GP_069,Kadamalaikundu,K. Myladumparai,KMYL,583819,Theni,Tamil Nadu,9.82226,77.54617,0,UNVERIFIED_DRAFT
+GP_070,Kumanatholu,K. Myladumparai,KMYL,583820,Theni,Tamil Nadu,9.82808,77.5131,0,UNVERIFIED_DRAFT
+GP_071,Manthisunai-Moolakadai,K. Myladumparai,KMYL,583821,Theni,Tamil Nadu,9.81728,77.47204,0,UNVERIFIED_DRAFT
+GP_072,Megamalai,K. Myladumparai,KMYL,583822,Theni,Tamil Nadu,9.7,77.4,1,VERIFIED
+GP_073,Murukodai,K. Myladumparai,KMYL,583823,Theni,Tamil Nadu,9.75571,77.63,0,UNVERIFIED_DRAFT
+GP_074,Muthalamparrai,K. Myladumparai,KMYL,583824,Theni,Tamil Nadu,9.8251,77.50616,0,UNVERIFIED_DRAFT
+GP_075,Myladumparai,K. Myladumparai,KMYL,583825,Theni,Tamil Nadu,9.69269,77.56003,0,UNVERIFIED_DRAFT
+GP_076,Nariyuthu,K. Myladumparai,KMYL,583826,Theni,Tamil Nadu,9.79586,77.63,0,UNVERIFIED_DRAFT
+GP_077,Palothu,K. Myladumparai,KMYL,583827,Theni,Tamil Nadu,9.79803,77.55404,0,UNVERIFIED_DRAFT
+GP_078,Ponnanpadugai,K. Myladumparai,KMYL,583828,Theni,Tamil Nadu,9.80181,77.55594,0,UNVERIFIED_DRAFT
+GP_079,Singarajapuram,K. Myladumparai,KMYL,583829,Theni,Tamil Nadu,9.83253,77.47476,0,UNVERIFIED_DRAFT
+GP_080,Thangamalpuram,K. Myladumparai,KMYL,583830,Theni,Tamil Nadu,9.80303,77.57535,0,UNVERIFIED_DRAFT
+GP_081,Thummakkundu,K. Myladumparai,KMYL,583831,Theni,Tamil Nadu,9.77115,77.51898,0,UNVERIFIED_DRAFT
+GP_082,Varusanadu,K. Myladumparai,KMYL,583832,Theni,Tamil Nadu,9.755,77.532,1,VERIFIED
+GP_083,A.Vadipatti,Periyakulam,PERI,583233,Theni,Tamil Nadu,10.07614,77.49172,0,UNVERIFIED_DRAFT
+GP_084,Algarnaickanpatti,Periyakulam,PERI,583234,Theni,Tamil Nadu,10.16035,77.56349,0,UNVERIFIED_DRAFT
+GP_085,Bomminaikanpatti,Periyakulam,PERI,583235,Theni,Tamil Nadu,10.13074,77.52293,0,UNVERIFIED_DRAFT
+GP_086,D.Vadipatti,Periyakulam,PERI,583236,Theni,Tamil Nadu,10.05907,77.53732,0,UNVERIFIED_DRAFT
+GP_087,Endapulli,Periyakulam,PERI,583237,Theni,Tamil Nadu,10.11317,77.54543,0,UNVERIFIED_DRAFT
+GP_088,Erumalanaickanpatti,Periyakulam,PERI,583238,Theni,Tamil Nadu,10.11875,77.58843,0,UNVERIFIED_DRAFT
+GP_089,G.Kallupatti,Periyakulam,PERI,583239,Theni,Tamil Nadu,10.07109,77.48,0,UNVERIFIED_DRAFT
+GP_090,Gullapuram,Periyakulam,PERI,583240,Theni,Tamil Nadu,10.0998,77.48669,0,UNVERIFIED_DRAFT
+GP_091,Jayamangalam,Periyakulam,PERI,583241,Theni,Tamil Nadu,10.04,77.59829,0,UNVERIFIED_DRAFT
+GP_092,Keelavadagarai,Periyakulam,PERI,583242,Theni,Tamil Nadu,10.12212,77.52306,0,UNVERIFIED_DRAFT
+GP_093,Lakshmipuram,Periyakulam,PERI,583243,Theni,Tamil Nadu,10.09936,77.60602,0,UNVERIFIED_DRAFT
+GP_094,Melmangalam,Periyakulam,PERI,583244,Theni,Tamil Nadu,10.0915,77.562,1,VERIFIED
+GP_095,Muthalakampatti,Periyakulam,PERI,583245,Theni,Tamil Nadu,10.1602,77.57642,0,UNVERIFIED_DRAFT
+GP_096,Sallipatti,Periyakulam,PERI,583246,Theni,Tamil Nadu,10.12823,77.50779,0,UNVERIFIED_DRAFT
+GP_097,Sarathupatti,Periyakulam,PERI,583247,Theni,Tamil Nadu,10.10998,77.5119,0,UNVERIFIED_DRAFT
+GP_098,Silvarpatty,Periyakulam,PERI,583248,Theni,Tamil Nadu,10.18,77.50838,0,UNVERIFIED_DRAFT
+GP_099,Vadaputhupatti,Periyakulam,PERI,583249,Theni,Tamil Nadu,10.06274,77.48785,0,UNVERIFIED_DRAFT
+GP_100,Ambasamudram,Theni,THENI,583350,Theni,Tamil Nadu,10.03807,77.42997,0,UNVERIFIED_DRAFT
+GP_101,Aranamaipudur,Theni,THENI,583301,Theni,Tamil Nadu,10.03131,77.48859,0,UNVERIFIED_DRAFT
+GP_102,Dharmapuri,Theni,THENI,583302,Theni,Tamil Nadu,10.0028,77.54,0,UNVERIFIED_DRAFT
+GP_103,Govindanagaram,Theni,THENI,583303,Theni,Tamil Nadu,9.96675,77.45605,0,UNVERIFIED_DRAFT
+GP_104,Jangalpatty,Theni,THENI,583304,Theni,Tamil Nadu,10.03639,77.45684,0,UNVERIFIED_DRAFT
+GP_105,Kattunaickanpatty,Theni,THENI,583305,Theni,Tamil Nadu,10.00879,77.50065,0,UNVERIFIED_DRAFT
+GP_106,Koduvilarpatty,Theni,THENI,583306,Theni,Tamil Nadu,9.972,77.501,1,VERIFIED
+GP_107,Kottur,Theni,THENI,583307,Theni,Tamil Nadu,9.954,77.452,1,VERIFIED
+GP_108,Kuppinaickanpatty,Theni,THENI,583308,Theni,Tamil Nadu,10.01285,77.46754,0,UNVERIFIED_DRAFT
+GP_109,Nagalapuram,Theni,THENI,583309,Theni,Tamil Nadu,10.01188,77.42,0,UNVERIFIED_DRAFT
+GP_110,Pommalaikundu,Theni,THENI,583310,Theni,Tamil Nadu,10.00022,77.51188,0,UNVERIFIED_DRAFT
+GP_111,Seelayampatty,Theni,THENI,583311,Theni,Tamil Nadu,10.07,77.50087,0,UNVERIFIED_DRAFT
+GP_112,Srirengapuram,Theni,THENI,583312,Theni,Tamil Nadu,10.01538,77.48503,0,UNVERIFIED_DRAFT
+GP_113,Thadicheri,Theni,THENI,583313,Theni,Tamil Nadu,9.98319,77.50887,0,UNVERIFIED_DRAFT
+GP_114,Thappukundu,Theni,THENI,583314,Theni,Tamil Nadu,10.0416,77.46386,0,UNVERIFIED_DRAFT
+GP_115,Unjampatty,Theni,THENI,583315,Theni,Tamil Nadu,10.0541,77.46656,0,UNVERIFIED_DRAFT
+GP_116,Upparpatty,Theni,THENI,583316,Theni,Tamil Nadu,9.95576,77.49306,0,UNVERIFIED_DRAFT
+GP_117,Vengatachalapuram,Theni,THENI,583317,Theni,Tamil Nadu,9.99085,77.4949,0,UNVERIFIED_DRAFT
+GP_118,Annaimalayanpatty,Uthamapalayam,UTHA,583718,Theni,Tamil Nadu,9.82432,77.34031,0,UNVERIFIED_DRAFT
+GP_119,Gokilapuram,Uthamapalayam,UTHA,583719,Theni,Tamil Nadu,9.832,77.331,1,VERIFIED
+GP_120,Lakshminayakanpatty,Uthamapalayam,UTHA,583720,Theni,Tamil Nadu,9.84961,77.34285,0,UNVERIFIED_DRAFT
+GP_121,Melasindalaicery,Uthamapalayam,UTHA,583721,Theni,Tamil Nadu,9.81038,77.29662,0,UNVERIFIED_DRAFT
+GP_122,Nagayagoundanpatty,Uthamapalayam,UTHA,583722,Theni,Tamil Nadu,9.78251,77.35117,0,UNVERIFIED_DRAFT
+GP_123,Pallavarayanpatti,Uthamapalayam,UTHA,583723,Theni,Tamil Nadu,9.80455,77.33073,0,UNVERIFIED_DRAFT
+GP_124,Ramasamynayakanpatty,Uthamapalayam,UTHA,583724,Theni,Tamil Nadu,9.84612,77.28402,0,UNVERIFIED_DRAFT
+GP_125,Royappanpatty,Uthamapalayam,UTHA,583725,Theni,Tamil Nadu,9.84523,77.30309,0,UNVERIFIED_DRAFT
+GP_126,T.Meenatchipuram,Uthamapalayam,UTHA,583726,Theni,Tamil Nadu,9.79469,77.36023,0,UNVERIFIED_DRAFT
+GP_127,T.Renganathapuram,Uthamapalayam,UTHA,583727,Theni,Tamil Nadu,9.85706,77.30949,0,UNVERIFIED_DRAFT
+GP_128,T.Sindalaichery,Uthamapalayam,UTHA,583728,Theni,Tamil Nadu,9.77896,77.29188,0,UNVERIFIED_DRAFT
+GP_129,Thamminayakanpatty,Uthamapalayam,UTHA,583729,Theni,Tamil Nadu,9.78508,77.37007,0,UNVERIFIED_DRAFT
+GP_130,U.Ammapatty,Uthamapalayam,UTHA,583730,Theni,Tamil Nadu,9.82149,77.30515,0,UNVERIFIED_DRAFT

@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="stageGlow" cx="25%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#f0f9ff" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#f8fafc" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#edf2f7" stop-opacity="1"/>
+    </radialGradient>
+
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f3b60"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- Radar Sweep Gradient -->
+    <linearGradient id="radarSweep" x1="420" y1="540" x2="720" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#0284c7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Iris & Pupil Gradients -->
+    <linearGradient id="irisGrad" x1="330" y1="450" x2="510" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0f3b60"/>
+    </linearGradient>
+
+    <!-- Agro Leaf Gradient -->
+    <linearGradient id="sproutGrad" x1="630" y1="400" x2="710" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="heroShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="40" flood-color="#0f3b60" flood-opacity="0.12"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#0284c7" flood-opacity="0.08"/>
+    </filter>
+
+    <filter id="eyeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#0284c7" flood-opacity="0.18"/>
+    </filter>
+
+    <pattern id="dotGrid" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#cbd5e1" fill-opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <!-- Full Background Canvas -->
+  <rect width="1920" height="1080" fill="url(#stageGlow)"/>
+  <!-- Subtly Textured Grid Layer -->
+  <rect width="1920" height="1080" fill="url(#dotGrid)"/>
+
+  <!-- Background Decorative Watermark (Subtle Concentric Weather Isobars) -->
+  <g opacity="0.35" transform="translate(1450, 540)">
+    <circle r="420" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="12 12" fill="none"/>
+    <circle r="340" stroke="#bae6fd" stroke-width="1.5" fill="none"/>
+    <circle r="260" stroke="#93c5fd" stroke-width="1" stroke-dasharray="8 8" fill="none"/>
+    <circle r="180" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.6"/>
+  </g>
+
+  <!-- ==================== MAIN HERO BRAND LOCKUP ==================== -->
+  <g id="brand-composition">
+
+    <!-- ==================== LEFT: THE EMBLEM (வானவிழி) ==================== -->
+    <g id="emblem" transform="translate(80, 0)">
+      
+      <!-- Ambient Glow Behind Radar -->
+      <circle cx="440" cy="540" r="340" fill="#e0f2fe" fill-opacity="0.35"/>
+
+      <!-- Outermost Precision Range Ring (Dashed Geodetic Coordinate Perimeter) -->
+      <circle cx="440" cy="540" r="320" stroke="#94a3b8" stroke-width="4.5" stroke-dasharray="16 16" fill="#ffffff" fill-opacity="0.8"/>
+
+      <!-- Second Range Ring: Satellite Orbit Ring -->
+      <circle cx="440" cy="540" r="250" stroke="#0284c7" stroke-width="3.5" stroke-opacity="0.5" fill="none"/>
+
+      <!-- Third Range Ring: Micro-Climatic Target Ring -->
+      <circle cx="440" cy="540" r="170" stroke="#10b981" stroke-width="3" stroke-opacity="0.6" fill="#f0fdf4" fill-opacity="0.55"/>
+
+      <!-- Dynamic Radar Sweep Sector (60 deg Cone Arc) -->
+      <path d="M 440 540 L 717 380 A 320 320 0 0 0 440 220 Z" fill="url(#radarSweep)"/>
+
+      <!-- Geodetic Axis Markers / Crosshairs -->
+      <!-- North -->
+      <line x1="440" y1="180" x2="440" y2="245" stroke="#0f3b60" stroke-width="7" stroke-linecap="round"/>
+      <!-- South -->
+      <line x1="440" y1="835" x2="440" y2="900" stroke="#0f3b60" stroke-width="7" stroke-linecap="round"/>
+      <!-- West -->
+      <line x1="80" y1="540" x2="145" y2="540" stroke="#0f3b60" stroke-width="7" stroke-linecap="round"/>
+      <!-- East -->
+      <line x1="735" y1="540" x2="800" y2="540" stroke="#0f3b60" stroke-width="7" stroke-linecap="round"/>
+
+      <!-- Cardinal Coordinate Dots -->
+      <circle cx="440" cy="290" r="5" fill="#64748b"/>
+      <circle cx="440" cy="790" r="5" fill="#64748b"/>
+      <circle cx="190" cy="540" r="5" fill="#64748b"/>
+      <circle cx="690" cy="540" r="5" fill="#64748b"/>
+
+      <!-- Agricultural Sprout Accent on Orbital Trajectory -->
+      <path d="M 650 420 C 705 390 740 440 720 495 C 695 470 670 450 650 420 Z" fill="url(#sproutGrad)"/>
+
+      <!-- Eye Contour (வானவிழி - Eye of the Sky) -->
+      <g filter="url(#eyeGlow)">
+        <path d="M 235 540 C 310 415 570 415 645 540 C 570 665 310 665 235 540 Z" 
+              fill="#ffffff" stroke="#0f3b60" stroke-width="16" stroke-linejoin="round"/>
+      </g>
+
+      <!-- Iris Structure -->
+      <circle cx="440" cy="540" r="82" fill="url(#irisGrad)"/>
+      <circle cx="440" cy="540" r="82" stroke="#0f3b60" stroke-width="4.5" fill="none"/>
+
+      <!-- Inner Moisture Pupil Core -->
+      <circle cx="440" cy="540" r="46" fill="#0284c7"/>
+      <circle cx="440" cy="540" r="25" fill="#0f3b60"/>
+
+      <!-- Specular Light Reflection / Rain Droplet Flare -->
+      <ellipse cx="462" cy="516" rx="14" ry="10" transform="rotate(-25 462 516)" fill="#ffffff"/>
+      <circle cx="424" cy="558" r="5.5" fill="#ffffff" fill-opacity="0.85"/>
+    </g>
+
+    <!-- ==================== RIGHT: TYPOGRAPHY, VISION & SPECIFICATIONS ==================== -->
+    <g id="brand-copy" transform="translate(930, 0)">
+      
+      <!-- Project Category Kicker -->
+      <g transform="translate(0, 310)">
+        <rect x="0" y="0" width="250" height="38" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+        <circle cx="18" cy="19" r="4.5" fill="#2563eb"/>
+        <text x="32" y="25" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="14" fill="#1d4ed8" letter-spacing="1.2">PRECISION AGRO-METEO</text>
+      </g>
+
+      <!-- Brand Names Row (English Wordmark + Tamil Calligraphic Script) -->
+      <g transform="translate(0, 425)">
+        <!-- Primary English Brand Name -->
+        <text x="0" y="0" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-weight="800" font-size="116" fill="#0f3b60" letter-spacing="-3.5">VaanVizhi</text>
+        
+        <!-- Authentic Tamil Script Mark -->
+        <text x="600" y="-12" font-family="'Mukta Malar', 'Noto Sans Tamil', 'Inter', sans-serif" font-weight="700" font-size="82" fill="#0284c7" letter-spacing="-0.5">வானவிழி</text>
+      </g>
+
+      <!-- Mission Tagline -->
+      <text x="4" y="505" font-family="'Inter', -apple-system, sans-serif" font-weight="700" font-size="34" fill="#1e293b" letter-spacing="-0.5">
+        Panchayat-Level Weather Intelligence &amp; Agro-Advisory
+      </text>
+
+      <!-- Description / Core Innovation -->
+      <text x="4" y="555" font-family="'Inter', -apple-system, sans-serif" font-weight="400" font-size="22" fill="#475569" letter-spacing="0.1">
+        High-Resolution 1.0 km² Micro-Scale Meteorological Downscaling Engine
+      </text>
+      <text x="4" y="590" font-family="'Inter', -apple-system, sans-serif" font-weight="400" font-size="20" fill="#64748b" letter-spacing="0.1">
+        Physics-Informed ML · IMD &amp; ERA5-Land Integration · TNAU Agro-Advisory Protocols
+      </text>
+
+      <!-- Divider Rule -->
+      <line x1="4" y1="640" x2="890" y2="640" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6 6"/>
+
+      <!-- Accreditations & Technical Badges Row -->
+      <g transform="translate(4, 680)">
+        
+        <!-- Badge 1: SIH 2026 Problem Statement -->
+        <g>
+          <rect x="0" y="0" width="220" height="54" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+          <circle cx="26" cy="27" r="6" fill="#2563eb"/>
+          <text x="44" y="34" font-family="'Inter', monospace" font-weight="700" font-size="18" fill="#1d4ed8" letter-spacing="0.5">PS 26074 · SIH 2026</text>
+        </g>
+
+        <!-- Badge 2: 1.0 km² Micro-Grid -->
+        <g transform="translate(240, 0)">
+          <rect x="0" y="0" width="215" height="54" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+          <circle cx="26" cy="27" r="6" fill="#16a34a"/>
+          <text x="44" y="34" font-family="'Inter', sans-serif" font-weight="700" font-size="18" fill="#15803d">1.0 km² Micro-Grid</text>
+        </g>
+
+        <!-- Badge 3: Decision Support System -->
+        <g transform="translate(475, 0)">
+          <rect x="0" y="0" width="205" height="54" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          <circle cx="26" cy="27" r="6" fill="#475569"/>
+          <text x="44" y="34" font-family="'Inter', sans-serif" font-weight="700" font-size="18" fill="#334155">Decision Support</text>
+        </g>
+
+        <!-- Badge 4: IMD & ERA5 Data Assimilation -->
+        <g transform="translate(700, 0)">
+          <rect x="0" y="0" width="190" height="54" rx="12" fill="#faf5ff" stroke="#d8b4fe" stroke-width="2"/>
+          <circle cx="26" cy="27" r="6" fill="#9333ea"/>
+          <text x="44" y="34" font-family="'Inter', sans-serif" font-weight="700" font-size="18" fill="#7e22ce">IMD &amp; ERA5-Land</text>
+        </g>
+
+      </g>
+
+    </g>
+
+  </g>
+</svg>

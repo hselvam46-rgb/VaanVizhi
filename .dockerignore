@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+*.pyo
+.git
+.gitignore
+.venv
+venv
+env
+vaanvizhi/data/features/training_dataset.csv.gz
+vaanvizhi/data/interim/truth_timeseries.csv.gz
+*.docx
+*.ps1

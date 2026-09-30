@@ -1,0 +1,33 @@
+- id: banana_spray_rain_delay
+  crop: banana
+  stages: [vegetative, shooting_flowering]
+  when:
+    all:
+      - {var: prob_rain, op: ">=", value: 0.65}
+      - {var: rain_amount, op: ">=", value: 10.0}
+  severity: amber
+  advice_en: "Heavy rain likely. Postpone pesticide spraying and clear field drainage channels to prevent water stagnation."
+  advice_ta: "கனமழை வாய்ப்பு. மருந்து தெளிப்பதை ஒத்திவைத்து, வடிகால் வாய்க்கால்களை தூர்வாரவும்."
+  source: "TNAU Crop Production Guide: Horticulture (Banana Agromet DSS Section 4.2)"
+
+- id: banana_high_wind_propping
+  crop: banana
+  stages: [shooting_flowering, fruiting_maturity]
+  when:
+    all:
+      - {var: wind, op: ">=", value: 24.0}
+  severity: red
+  advice_en: "Strong gusty winds anticipated. Provide sturdy bamboo/eucalyptus propping to bunches and pseudo-stems to prevent lodging."
+  advice_ta: "பலத்த காற்று வீசக்கூடும். வாழைக்கு மூங்கில் முட்டு கொடுத்து சாய்வதைத் தடுக்கவும்."
+  source: "ICAR-NRCB (National Research Centre for Banana) Wind Management Protocol 2023"
+
+- id: banana_heat_flowering_stress
+  crop: banana
+  stages: [shooting_flowering]
+  when:
+    all:
+      - {var: tmax, op: ">=", value: 36.5}
+  severity: amber
+  advice_en: "High daytime temperature. Provide light evening irrigation and apply dried banana trash mulch around root zone."
+  advice_ta: "கடும் வெப்பம். மாலையில் மிதமான நீர்ப்பாசனம் செய்து, தரைப்பகுதியில் சருகுகளால் மூடாக்கு இடவும்."
+  source: "TNAU Agritech Portal: Soil Moisture & Heat Stress Mitigation in Banana"
