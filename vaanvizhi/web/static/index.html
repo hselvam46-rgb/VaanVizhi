@@ -95,6 +95,47 @@
 <body class="bg-surface font-sans text-on-surface antialiased text-[13px] leading-normal select-none min-h-screen flex">
 
   <!-- ========================================================================= -->
+  <!-- 0. IMMERSIVE BRAND SPLASH & INITIALIZATION LOADER -->
+  <!-- ========================================================================= -->
+  <div id="appSplashScreen" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-surface/95 backdrop-blur-md select-none transition-all duration-700 ease-out">
+    <div class="flex flex-col items-center max-w-sm w-full px-6 text-center animate-in fade-in zoom-in-95 duration-500">
+      
+      <!-- Brand Emblem & Typography Card -->
+      <div class="relative group mb-6">
+        <div class="absolute -inset-3 bg-gradient-to-tr from-emerald-500/25 via-sky-500/20 to-amber-500/25 rounded-3xl blur-xl opacity-75 animate-pulse"></div>
+        <div class="relative bg-surface-container-lowest p-3 rounded-3xl shadow-2xl border border-outline-variant/30 flex items-center justify-center overflow-hidden">
+          <img src="/static/splash.jpg?v=1" alt="வானவிழி - VaanVizhi Hyperlocal Agro Intelligence" class="w-64 max-w-full h-auto object-contain rounded-2xl" />
+        </div>
+      </div>
+
+      <!-- Live Loading Progress Bar -->
+      <div class="w-full bg-surface-container-high rounded-full h-2 mb-3 overflow-hidden shadow-inner border border-outline-variant/20">
+        <div id="splashProgressBar" class="h-full bg-gradient-to-r from-emerald-600 via-teal-500 to-sky-600 rounded-full transition-all duration-300 ease-out" style="width: 15%"></div>
+      </div>
+
+      <!-- Status Indicator & Telemetry Step -->
+      <div class="flex items-center justify-between w-full text-[11px] font-mono text-on-surface-variant mb-2 px-0.5">
+        <span id="splashStatusText" class="flex items-center gap-1.5 font-medium truncate pr-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></span>
+          <span class="truncate">Calibrating 130 Panchayat Micro-Grids...</span>
+        </span>
+        <span id="splashProgressPct" class="font-bold text-primary flex-shrink-0">15%</span>
+      </div>
+
+      <!-- Gov / SIH Footer badge -->
+      <div class="flex items-center justify-center gap-2 mt-3 text-[10px] text-on-surface-variant/80 font-mono">
+        <span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-bold">SIH PS 26074</span>
+        <span>•</span>
+        <span>Theni District Pilot</span>
+        <span>•</span>
+        <span class="text-emerald-600 font-semibold">Live Operational</span>
+      </div>
+
+      <p class="text-[9px] text-on-surface-variant/50 mt-3 hover:text-on-surface-variant transition-colors cursor-pointer" id="splashSkipText">Click anywhere to skip</p>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- 1. FIXED LEFT VERTICAL SIDEBAR (w-64) -->
   <!-- ========================================================================= -->
   <aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto border-r border-surface-container-high/60">
@@ -1927,6 +1968,6 @@ CUMB,2026-10-24,32.0,21.5,82.0,18.0,14.5..." class="w-full p-3 font-mono text-[1
     </div>
   </div>
 
-  <script src="/static/app.js?v=12"></script>
+  <script src="/static/app.js?v=13"></script>
 </body>
 </html>

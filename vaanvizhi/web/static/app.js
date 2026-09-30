@@ -186,8 +186,54 @@ const VEDASANDUR_DEMO = [
   }
 ];
 
+// =========================================================================
+// 0. BRAND SPLASH & INITIALIZATION LOADER CONTROLLER
+// =========================================================================
+function initSplashScreen() {
+  const splash = document.getElementById("appSplashScreen");
+  const bar = document.getElementById("splashProgressBar");
+  const text = document.getElementById("splashStatusText");
+  const pct = document.getElementById("splashProgressPct");
+  if (!splash) return { update: () => {}, close: () => {} };
+
+  // Allow clicking anywhere to skip immediately
+  splash.addEventListener("click", () => {
+    dismissSplash();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") dismissSplash();
+  });
+
+  function setProgress(percent, message) {
+    if (bar) bar.style.width = `${Math.min(100, Math.max(0, percent))}%`;
+    if (pct) pct.textContent = `${Math.round(percent)}%`;
+    if (text && message) {
+      text.innerHTML = `
+        <span class="w-2 h-2 rounded-full ${percent >= 100 ? 'bg-emerald-400' : 'bg-emerald-500 animate-ping'} flex-shrink-0"></span>
+        <span class="truncate">${message}</span>
+      `;
+    }
+  }
+
+  function dismissSplash() {
+    if (!splash || splash.dataset.dismissed) return;
+    splash.dataset.dismissed = "true";
+    setProgress(100, "வானவிழி Platform Ready!");
+    splash.classList.add("opacity-0", "pointer-events-none");
+    setTimeout(() => {
+      if (splash.parentNode) splash.remove();
+    }, 750);
+  }
+
+  return {
+    update: setProgress,
+    close: dismissSplash
+  };
+}
+
 // Document Ready
 document.addEventListener("DOMContentLoaded", async () => {
+  const splash = initSplashScreen();
   if (window.lucide) lucide.createIcons();
 
   initSidebarNavigation();
@@ -199,13 +245,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   initImdModal();
   initLiveLocationModal();
 
+  splash.update(30, "Calibrating 130 Panchayat Micro-Grids (1.0 km²)...");
+
   // Load backend data
-  await loadMetadata();
-  await loadBlocksAndPanchayats();
+  try {
+    await loadMetadata();
+    splash.update(60, "Loading High-Resolution DEM & Topographic Features...");
+    await loadBlocksAndPanchayats();
+    splash.update(85, "Assembling Multi-Quantile LightGBM Ensembles...");
+  } catch (err) {
+    console.warn("Backend metadata load notice:", err);
+  }
 
   // Select Kovilur by default
   selectPanchayat(VEDASANDUR_DEMO[0]);
   fetchAndDisplayRainForecast(10.0100, 77.4800, "Kovilur (வேடசந்தூர் வட்டம்)");
+
+  splash.update(100, "வானவிழி Platform Ready!");
+  setTimeout(() => {
+    splash.close();
+  }, 650);
 });
 
 // =========================================================================
