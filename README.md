@@ -1,4 +1,9 @@
-# VaanVizhi: Hyperlocal Agromet Downscaling and Advisory System
+<p align="center">
+  <img src="vaanvizhi/web/static/logo.png" alt="VaanVizhi Official Emblem" width="180" />
+</p>
+
+# VaanVizhi (வானவிழி)
+### Hyperlocal Agromet Downscaling and Advisory System
 **Pilot District:** Theni District, Tamil Nadu (8 Blocks, 130 Gram Panchayats)
 
 VaanVizhi is an end-to-end meteorological and agronomic decision-support platform designed to bridge the resolution gap between coarse Numerical Weather Prediction (NWP) block forecasts (9 km ECMWF IFS / IMD Agromet DSS) and the microclimatic realities of village-level agriculture across the Western Ghats.
